@@ -6,7 +6,6 @@ import com.example.usermanagementrestapi.model.mapper.UserMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -65,11 +64,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> deleteUserById(int id) {
         ArrayList<UserDto> userDtos = new ArrayList<UserDto>();
-        Iterator<User> iterator = users.iterator();
-        while (iterator.hasNext()) {
-            User user = iterator.next();
-            if (user.getId() == id) {
-                iterator.remove();
+        for (User user: users) {
+            if(user.getId() == id) {
+                users.remove(user);
                 break;
             }
         }
