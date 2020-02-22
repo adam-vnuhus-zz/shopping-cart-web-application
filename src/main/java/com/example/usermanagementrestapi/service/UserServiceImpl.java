@@ -1,8 +1,12 @@
 package com.example.usermanagementrestapi.service;
 
 import com.example.usermanagementrestapi.entity.User;
+import com.example.usermanagementrestapi.exception.DuplicateRecordException;
+import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.UserDto;
 import com.example.usermanagementrestapi.model.mapper.UserMapper;
+import com.example.usermanagementrestapi.model.request.CreateUserReq;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -40,13 +44,31 @@ public class UserServiceImpl implements UserService {
                 return UserMapper.toUserDto(user);
             }
         }
-        return null;
+        throw new NotFoundException("Không tìm thấy user");
     }
 
     @Override
-    public UserDto register(User user) {
+    public UserDto createUser(CreateUserReq req) {
+        //Validate
+        //Kiem tra email da ton tai hay chua
+        for (User user: users) {
+            if(user.getEmail().equals(req.getEmail())) {
+                throw new DuplicateRecordException("Email da ton tai trong he thong");
+            }
+        }
+
+        //Convert CreateUserReq
+        User user = new User();
+        user.setId(users.size());
+        user.setPhone(req.getPhone());
+        user.setName(req.getFullName());
+        user.setEmail(req.getEmail());
+        //Ma hoa mat khau
+        user.setPassword(BCrypt.hashpw(req.getPassword(), BCrypt.gensalt(12)));
+
         users.add(user);
-        return UserMapper.toUserDto(user);
+
+        return null;
     }
 
     @Override
