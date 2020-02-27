@@ -1,8 +1,5 @@
 package com.example.usermanagementrestapi.controller;
 
-import com.example.usermanagementrestapi.entity.Product;
-import io.swagger.models.Model;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -29,6 +26,11 @@ public class ThymeleafController {
     @GetMapping("/product-details")
     public String productDetails() {
         return "product-details";
+    }
+
+    @GetMapping("/wishlist")
+    public String wishList() {
+        return "wishlist";
     }
 
     @GetMapping("/shop")
