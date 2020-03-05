@@ -1,8 +1,16 @@
 package com.example.usermanagementrestapi.model.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.Date;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private int id;
 
@@ -13,4 +21,6 @@ public class UserDto {
     private String phone;
 
     private String avatar;
+
+    private Date birthday;
 }

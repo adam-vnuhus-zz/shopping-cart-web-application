@@ -6,14 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateUserReq {
+public class UpdateUserReq {
     @NotNull(message = "Full name is required")
     @NotEmpty(message = "Full name is required")
     @ApiModelProperty(
@@ -51,4 +53,13 @@ public class CreateUserReq {
             required=true
     )
     private String phone;
+
+    @Valid
+    @URL(regexp="(https?:\\/\\/.*\\.(?:png|jpg))", message="Avatar must be an url image")
+    @ApiModelProperty(
+            example="https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png",
+            notes="Avatar must be an url image",
+            required=false
+    )
+    private String avatar;
 }

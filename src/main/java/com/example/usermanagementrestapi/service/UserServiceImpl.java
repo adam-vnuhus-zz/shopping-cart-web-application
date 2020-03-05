@@ -2,99 +2,98 @@ package com.example.usermanagementrestapi.service;
 
 import com.example.usermanagementrestapi.entity.User;
 import com.example.usermanagementrestapi.exception.DuplicateRecordException;
+import com.example.usermanagementrestapi.exception.InternalServerException;
 import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.UserDto;
 import com.example.usermanagementrestapi.model.mapper.UserMapper;
 import com.example.usermanagementrestapi.model.request.CreateUserReq;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import com.example.usermanagementrestapi.model.request.UpdateUserReq;
+import com.example.usermanagementrestapi.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class UserServiceImpl implements UserService {
-
-    private static ArrayList<User> users = new ArrayList<User>();
-
-    static {
-        users.add(new User(1,"Nguyen Van A","nva@gmail.com","123456789","avatar.img","123"));
-        users.add(new User(2,"Nguyen Van B","nvb@gmail.com","123456789","avatar.img","123"));
-        users.add(new User(3,"Nguyen Van C","nvc@gmail.com","123456789","avatar.img","123"));
-        users.add(new User(4,"Nguyen Van D","nvd@gmail.com","123456789","avatar.img","123"));
-    }
+public class UserServiceImpl implements com.example.usermanagementrestapi.service.UserService {
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<UserDto> getListUser() {
+        List<User> users = userRepository.findAll();
 
-        ArrayList<UserDto> userDtos = new ArrayList<UserDto>();
-
-        //Convert users -> userDtos
-        for (User user: users) {
-            userDtos.add(UserMapper.toUserDto(user));
+        List<UserDto> rs = new ArrayList<UserDto>();
+        for (User user : users) {
+            rs.add(UserMapper.toUserDto(user));
         }
 
-        return userDtos;
+        return rs;
+    }
+
+    @Override
+    public Page<User> findUserLikeName(String name, int page) {
+        Page<User> rs = userRepository.findUserByName(name, PageRequest.of(page,10, Sort.by("id").descending()));
+        return rs;
     }
 
     @Override
     public UserDto getUserById(int id) {
-        for (User user: users) {
-            if(user.getId() == id) {
-                return UserMapper.toUserDto(user);
-            }
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new NotFoundException("No user found");
         }
-        throw new NotFoundException("Không tìm thấy user");
+
+        return UserMapper.toUserDto(user.get());
     }
 
     @Override
     public UserDto createUser(CreateUserReq req) {
-        //Validate
-        //Kiem tra email da ton tai hay chua
-        for (User user: users) {
-            if(user.getEmail().equals(req.getEmail())) {
-                throw new DuplicateRecordException("Email da ton tai trong he thong");
-            }
+        // Check email exist
+        User user = userRepository.findByEmail(req.getEmail());
+        if (user != null) {
+            throw new DuplicateRecordException("Email is already in use");
         }
 
-        //Convert CreateUserReq
-        User user = new User();
-        user.setId(users.size());
-        user.setPhone(req.getPhone());
-        user.setName(req.getFullName());
-        user.setEmail(req.getEmail());
-        //Ma hoa mat khau
-        user.setPassword(BCrypt.hashpw(req.getPassword(), BCrypt.gensalt(12)));
+        user = UserMapper.toUser(req);
+        userRepository.save(user);
 
-        users.add(user);
-
-        return null;
-    }
-
-    @Override
-    public UserDto updateUserById(User user, int id) {
-        User temp = user;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getId() == id) {
-                users.set(i, temp);
-                break;
-            }
-        }
         return UserMapper.toUserDto(user);
     }
 
     @Override
-    public List<UserDto> deleteUserById(int id) {
-        ArrayList<UserDto> userDtos = new ArrayList<UserDto>();
-        for (User user: users) {
-            if(user.getId() == id) {
-                users.remove(user);
-                break;
-            }
+    public UserDto updateUser(UpdateUserReq req, int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new NotFoundException("No user found");
         }
-        for (User user: users) {
-            userDtos.add(UserMapper.toUserDto(user));
+
+        User updateUser = UserMapper.toUser(req, id);
+        try {
+            userRepository.save(updateUser);
+        } catch (Exception ex) {
+            throw new InternalServerException("Database error. Can't update user");
         }
-        return userDtos;
+
+        return UserMapper.toUserDto(updateUser);
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new NotFoundException("No user found");
+        }
+
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception ex) {
+            throw new InternalServerException("Database error. Can't delete user");
+        }
     }
 }

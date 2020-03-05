@@ -4,33 +4,29 @@ import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@Component
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
 @Table(name="car")
 @TypeDef(
         name = "json",
         typeClass = JsonStringType.class
 )
-public class Product {
-
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name="name", nullable = false)
     private String name;
-
-    @Column(name = "thumbnail")
-    private String thumbnail;
 
     @Type(type = "json")
     @Column(name = "images", columnDefinition = "json")
