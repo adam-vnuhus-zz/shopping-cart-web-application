@@ -51,19 +51,19 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     }
 
     @Override
-    public Page<User> findUserLikeName(String name, int page) {
-        Page<User> rs = userRepository.findUserByName(name, PageRequest.of(page,10, Sort.by("id").descending()));
-        return rs;
-    }
-
-    @Override
     public UserDto getUserById(int id) {
         Optional<User> user = userRepository.findById(id);
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             throw new NotFoundException("No user found");
         }
 
         return UserMapper.toUserDto(user.get());
+    }
+
+    @Override
+    public Page<User> findUserLikeName(String name, int page) {
+        Page<User> rs = userRepository.findUserByName(name, PageRequest.of(page,10, Sort.by("id").descending()));
+        return rs;
     }
 
     @Override
