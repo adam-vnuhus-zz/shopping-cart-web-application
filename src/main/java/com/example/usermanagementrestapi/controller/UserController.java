@@ -31,6 +31,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "Create user", response = UserDto.class)
+    @ApiResponses({
+            @ApiResponse(code=400,message = "Email already exists in the system"),
+            @ApiResponse(code=500,message = "")
+    })
+    @PostMapping("")
+    public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserReq req) {
+        UserDto result = userService.createUser(req);
+        return ResponseEntity.ok(result);
+    }
+
     @ApiOperation(value = "Get list user", response = UserDto.class, responseContainer = "List")
     @ApiResponses({
             @ApiResponse(code=500,message = "")
@@ -67,17 +78,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable int id) {
         UserDto result = userService.getUserById(id);
-        return ResponseEntity.ok(result);
-    }
-
-    @ApiOperation(value = "Create user", response = UserDto.class)
-    @ApiResponses({
-            @ApiResponse(code=400,message = "Email already exists in the system"),
-            @ApiResponse(code=500,message = "")
-    })
-    @PostMapping("")
-    public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserReq req) {
-        UserDto result = userService.createUser(req);
         return ResponseEntity.ok(result);
     }
 

@@ -20,7 +20,5 @@ public class UserDto {
 
     private String phone;
 
-    private String avatar;
-
-    private Date birthday;
+//    private Date birthday;
 }

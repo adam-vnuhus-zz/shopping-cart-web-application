@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-@Component
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="car")
+@Table(name="product")
 @TypeDef(
         name = "json",
         typeClass = JsonStringType.class
@@ -24,7 +25,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int productId;
 
     @Column(name="name", nullable = false)
     private String name;
@@ -40,6 +41,12 @@ public class Product {
     @Column(name = "engine", columnDefinition = "json")
     private Engine engine;
 
+    @Column(name = "stock_amount")
+    private int stockAmount;
+
+    @Column(name = "price")
+    private float price;
+
     @Getter
     @Setter
     @AllArgsConstructor
@@ -50,4 +57,14 @@ public class Product {
 
         private String type;
     }
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> oders;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Cart> carts;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
 }

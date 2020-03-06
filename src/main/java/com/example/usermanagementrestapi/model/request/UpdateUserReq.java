@@ -54,12 +54,12 @@ public class UpdateUserReq {
     )
     private String phone;
 
-    @Valid
-    @URL(regexp="(https?:\\/\\/.*\\.(?:png|jpg))", message="Avatar must be an url image")
-    @ApiModelProperty(
-            example="https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png",
-            notes="Avatar must be an url image",
-            required=false
-    )
-    private String avatar;
+//    @Valid
+//    @URL(regexp="(https?:\\/\\/.*\\.(?:png|jpg))", message="Avatar must be an url image")
+//    @ApiModelProperty(
+//            example="https://ssl.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png",
+//            notes="Avatar must be an url image",
+//            required=false
+//    )
+//    private String avatar;
 }

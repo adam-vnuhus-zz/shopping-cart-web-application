@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @NamedNativeQuery(
         name = "getUserInfo",
@@ -22,7 +23,7 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int userId;
 
     @NotNull
     @Column(name="email", unique = true)
@@ -34,15 +35,18 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="full_name")
+    private String fullName;
 
-    @Column(name="avatar")
-    private String avatar;
-
-    @Column(name="birthday")
-    private Date birthday;
+//    @Column(name="avatar")
+//    private String avatar;
+//
+//    @Column(name="birthday")
+//    private Date birthday;
 
     @Column(name = "role", nullable = false, columnDefinition = "varchar(255) default 'USER'")
     private String role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 }

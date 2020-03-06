@@ -25,6 +25,20 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     private UserRepository userRepository;
 
     @Override
+    public UserDto createUser(CreateUserReq req) {
+        // Check email exist
+        User user = userRepository.findByEmail(req.getEmail());
+        if (user != null) {
+            throw new DuplicateRecordException("Email is already in use");
+        }
+
+        user = UserMapper.toUser(req);
+        userRepository.save(user);
+
+        return UserMapper.toUserDto(user);
+    }
+
+    @Override
     public List<UserDto> getListUser() {
         List<User> users = userRepository.findAll();
 
@@ -45,7 +59,7 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     @Override
     public UserDto getUserById(int id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
+        if (!user.isPresent()) {
             throw new NotFoundException("No user found");
         }
 
@@ -53,23 +67,9 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     }
 
     @Override
-    public UserDto createUser(CreateUserReq req) {
-        // Check email exist
-        User user = userRepository.findByEmail(req.getEmail());
-        if (user != null) {
-            throw new DuplicateRecordException("Email is already in use");
-        }
-
-        user = UserMapper.toUser(req);
-        userRepository.save(user);
-
-        return UserMapper.toUserDto(user);
-    }
-
-    @Override
     public UserDto updateUser(UpdateUserReq req, int id) {
         Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
+        if (!user.isPresent()) {
             throw new NotFoundException("No user found");
         }
 

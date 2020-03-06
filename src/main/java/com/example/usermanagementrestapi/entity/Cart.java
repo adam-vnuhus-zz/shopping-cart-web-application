@@ -1,6 +1,9 @@
 package com.example.usermanagementrestapi.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,29 +15,24 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="orders")
-public class Order {
+@Table(name="cart")
+public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int oderId;
+    private int cartId;
 
-    @Column(name = "status")
-    private int status;
+    @CreationTimestamp
+    @Column(name = "created_date" ,updatable = false)
+    private Date createdDate;
 
-    @Column(name = "ship_address")
-    private String shipAddress;
-
-    @Column(name = "total_money")
-    private float totalMoney;
-
-    @ManyToOne
-    @JoinColumn(name="userId")
-    private User user;
+    @Column(name = "quantity")
+    private int quantity;
 
     @ManyToMany
     @JoinTable(
-            name = "oder_item",
-            joinColumns = @JoinColumn(name = "orderId"),
+            name = "cart_product",
+            joinColumns = @JoinColumn(name = "cartId"),
             inverseJoinColumns = @JoinColumn(name = "productId")
     )
     private List<Product> products;
