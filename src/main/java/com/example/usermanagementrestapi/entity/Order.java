@@ -16,7 +16,7 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int oderId;
+    private int orderId;
 
     @Column(name = "status")
     private int status;
@@ -33,7 +33,7 @@ public class Order {
 
     @ManyToMany
     @JoinTable(
-            name = "oder_item",
+            name = "order_item",
             joinColumns = @JoinColumn(name = "orderId"),
             inverseJoinColumns = @JoinColumn(name = "productId")
     )

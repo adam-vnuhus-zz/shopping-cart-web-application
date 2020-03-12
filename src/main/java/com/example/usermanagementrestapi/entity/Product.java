@@ -59,7 +59,7 @@ public class Product {
     }
 
     @ManyToMany(mappedBy = "products")
-    private List<Order> oders;
+    private List<Order> orders;
 
     @ManyToMany(mappedBy = "products")
     private List<Cart> carts;
