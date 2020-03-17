@@ -1,14 +1,14 @@
 package com.example.usermanagementrestapi.service;
 
 import com.example.usermanagementrestapi.entity.Product;
-import com.example.usermanagementrestapi.entity.User;
 import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.ProductDto;
-import com.example.usermanagementrestapi.model.dto.UserDto;
 import com.example.usermanagementrestapi.model.mapper.ProductMapper;
-import com.example.usermanagementrestapi.model.mapper.UserMapper;
+import com.example.usermanagementrestapi.repository.CategoryRepository;
 import com.example.usermanagementrestapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +20,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public List<ProductDto> getListProduct() {
@@ -40,5 +43,29 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return ProductMapper.toProductDto(product.get());
+    }
+
+    @Override
+    public List<ProductDto> getListProductNew() {
+
+        List<Product> products = productRepository.getListProductNew();
+        ArrayList<ProductDto> productDtos = new ArrayList<>();
+        for (Product product : products) {
+            productDtos.add(ProductMapper.toProductDto(product));
+        }
+        return productDtos;
+    }
+
+    @Override
+    public Product getOne(int productId) {
+
+        Product product = productRepository.getOne(productId);
+
+        return product;
+    }
+
+    @Override
+    public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable, Integer categoryId, String productName) {
+        return null;
     }
 }

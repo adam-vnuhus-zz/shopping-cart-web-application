@@ -4,11 +4,10 @@ import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,12 +33,14 @@ public class Product {
     private String thumbnail;
 
     @Type(type = "json")
-    @Column(name = "images", columnDefinition = "json")
-    private ArrayList<String> images;
-
-    @Type(type = "json")
     @Column(name = "engine", columnDefinition = "json")
     private Engine engine;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "create_date", updatable = false)
+    private Date createDate;
 
     @Column(name = "stock_amount")
     private int stockAmount;
@@ -67,4 +68,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    @OneToMany(mappedBy = "product")
+    private List<Images> images;
+
 }
