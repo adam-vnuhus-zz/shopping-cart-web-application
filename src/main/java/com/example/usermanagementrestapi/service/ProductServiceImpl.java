@@ -1,6 +1,7 @@
 package com.example.usermanagementrestapi.service;
 
 import com.example.usermanagementrestapi.entity.Product;
+import com.example.usermanagementrestapi.exception.DuplicateRecordException;
 import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.ProductDto;
 import com.example.usermanagementrestapi.model.mapper.ProductMapper;
@@ -67,5 +68,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable, Integer categoryId, String productName) {
         return null;
+    }
+
+    //Test api
+
+    @Override
+    public ProductDto createProduct(ProductDto productDto) {
+
+        Product product = productRepository.findAllByName(productDto.getName());
+        if (product != null) {
+            throw new DuplicateRecordException("Ten san pham da ton tai");
+        }
+
+        product = ProductMapper.toProduct(productDto);
+        product.setCategory(categoryRepository.getOne(productDto.getCategoryId()));
+        productRepository.save(product);
+        return ProductMapper.toProductDto(product);
     }
 }

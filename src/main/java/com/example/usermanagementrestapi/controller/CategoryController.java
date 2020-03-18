@@ -11,10 +11,9 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/categories")
@@ -32,6 +31,19 @@ public class CategoryController {
     public ResponseEntity<?> getListCategory() {
         List<CategoryDto> result = categoryService.getListCategory();
 
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    //Test api
+    @ApiOperation(value = "Create category", response = CategoryDto.class)
+    @ApiResponses({
+            @ApiResponse(code=400,message = "Category already exists in the system"),
+            @ApiResponse(code=500,message = "")
+    })
+    @PostMapping("")
+    public ResponseEntity<?> createCategory(@Valid @RequestBody CategoryDto categoryDto){
+
+        CategoryDto result = categoryService.createCategory(categoryDto);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }

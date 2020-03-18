@@ -23,4 +23,7 @@ public interface ProductService  {
     public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable,
                                                                          @Param("categoryId") Integer categoryId,
                                                                          @Param("productName") String productName);
+
+    //Test api
+    ProductDto createProduct(ProductDto productDto);
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -379,14 +379,17 @@
                             <h4> USED BIKES </h4>
                         </a>
                     </div>
+
+<!--                    Begin product tab content-->
                     <div class="tab-content jump">
                         <div class="tab-pane active" id="home1">
                             <div class="product-slider-active owl-carousel">
-                                <div class="product-wrapper-bundle">
+                                <div class="product-wrapper-bundle" th:each="product : ${products}">
                                     <div class="product-wrapper">
                                         <div class="product-img">
                                             <a href="product-details.html">
-                                                <img src="http://preview.freethemescloud.com/oswan/assets/img/product/product-1.jpg" alt="">
+<!--                                                <img src="http://preview.freethemescloud.com/oswan/assets/img/product/product-1.jpg" alt="car">-->
+                                                <img th:src="${product.getThumbnail()}" alt="car">
                                             </a>
                                             <div class="product-item-dec">
                                                 <ul>

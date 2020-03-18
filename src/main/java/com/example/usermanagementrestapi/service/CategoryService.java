@@ -11,4 +11,7 @@ import java.util.List;
 public interface CategoryService {
 
     public List<CategoryDto> getListCategory();
+
+    //Test api
+    CategoryDto createCategory(CategoryDto categoryDto);
 }

@@ -9,11 +9,9 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/products")
@@ -22,6 +20,20 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    //Test api
+    @ApiOperation(value = "Create product", response = ProductDto.class)
+    @ApiResponses({
+            @ApiResponse(code = 400, message = "Product already exists in the system"),
+            @ApiResponse(code = 500, message = "")
+    })
+    @PostMapping("")
+    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDto productDto) {
+
+        ProductDto result = productService.createProduct(productDto);
+
+        return ResponseEntity.ok(result);
+    }
 
     @ApiOperation(value = "Get list product", response = ProductDto.class, responseContainer = "List")
     @ApiResponses({

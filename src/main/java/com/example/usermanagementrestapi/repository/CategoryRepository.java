@@ -10,4 +10,7 @@ import java.util.List;
 @Transactional
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
+
+    //Test api
+    Category findAllByBrand(String brand);
 }

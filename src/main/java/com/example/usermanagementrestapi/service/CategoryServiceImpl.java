@@ -1,6 +1,7 @@
 package com.example.usermanagementrestapi.service;
 
 import com.example.usermanagementrestapi.entity.Category;
+import com.example.usermanagementrestapi.exception.DuplicateRecordException;
 import com.example.usermanagementrestapi.model.dto.CategoryDto;
 import com.example.usermanagementrestapi.model.mapper.CategoryMapper;
 import com.example.usermanagementrestapi.repository.CategoryRepository;
@@ -27,5 +28,19 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return rs;
+    }
+
+    //Test api
+    @Override
+    public CategoryDto createCategory(CategoryDto categoryDto) {
+
+        Category category = categoryRepository.findAllByBrand(categoryDto.getBrand());
+        if (category != null){
+            throw new DuplicateRecordException("Ten danh muc da ton tai");
+        }
+
+        category = CategoryMapper.toCategory(categoryDto);
+        categoryRepository.save(category);
+        return CategoryMapper.toCategoryDto(category);
     }
 }

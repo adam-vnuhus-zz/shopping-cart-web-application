@@ -13,9 +13,15 @@ public class ProductDto {
 
     private int productId;
 
+    private int categoryId;
+
     private String name;
 
     private String thumbnail;
+
+    private String description;
+
+    private int stockAmount;
 
     private float price;
 }
