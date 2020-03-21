@@ -4,6 +4,7 @@ import com.example.usermanagementrestapi.model.dto.ProductDto;
 import com.example.usermanagementrestapi.service.CategoryService;
 import com.example.usermanagementrestapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,8 +59,24 @@ public class ThymeleafController {
         return "shop";
     }
 
-    @GetMapping("/login-register")
-    public String loginRegister() {
-        return "login-register";
+    @GetMapping("/signin")
+    public String signIn() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            return "login-register";
+        }
+        return "index";
     }
+
+    @GetMapping("/signup")
+    public String signUp() {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            return "login-register";
+        }
+        return "index";
+    }
+
+//    @GetMapping("/403")
+//    public String forbidden() {
+//        return "403";
+//    }
 }
