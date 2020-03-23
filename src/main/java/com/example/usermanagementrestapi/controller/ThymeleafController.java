@@ -21,6 +21,7 @@ public class ThymeleafController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping("/")
     public String index(Model model, @ModelAttribute("product") ProductDto productDto) {
 
