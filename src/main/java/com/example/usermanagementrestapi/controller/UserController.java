@@ -1,11 +1,8 @@
 package com.example.usermanagementrestapi.controller;
 
 import com.example.usermanagementrestapi.exception.NotFoundException;
-import com.example.usermanagementrestapi.model.BaseApiResult;
 import com.example.usermanagementrestapi.model.dto.UserDto;
-import com.example.usermanagementrestapi.model.request.AuthenticateReq;
 import com.example.usermanagementrestapi.model.request.CreateUserReq;
-import com.example.usermanagementrestapi.security.JwtTokenUtil;
 import com.example.usermanagementrestapi.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,16 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -40,14 +30,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-
 
     @ApiOperation(value = "Create user", response = UserDto.class)
     @ApiResponses({
@@ -173,55 +155,5 @@ public class UserController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"")
                 .body(resource);
-    }
-
-    //Api client
-
-    @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@Valid @RequestBody CreateUserReq createUserReq) {
-        BaseApiResult result = new BaseApiResult();
-        try {
-            userService.createUser(createUserReq);
-            result.setSuccess(true);
-            result.setMessage("Sign Up successfully!");
-        } catch (Exception e) {
-            result.setSuccess(false);
-            result.setMessage(e.getMessage());
-        }
-        return ResponseEntity.ok(result);
-    }
-
-    @PostMapping("/signin")
-    public ResponseEntity<?> login(@Valid @RequestBody AuthenticateReq req,
-                                   HttpServletResponse response) {
-        BaseApiResult result = new BaseApiResult();
-        try {
-            // Xác thực từ username và password.
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            req.getEmail(),
-                            req.getPassword()
-                    )
-            );
-
-            // Nếu không xảy ra exception tức là thông tin hợp lệ
-            // Set thông tin authentication vào Security Context
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            // Gen token
-            String token = jwtTokenUtil.generateToken((UserDetails) authentication.getPrincipal());
-
-            result.setSuccess(true);
-            result.setMessage("Sign In successfully!");
-
-            Cookie jwtToken = new Cookie("jwt_token", token);
-            jwtToken.setMaxAge(60*60*24);
-            jwtToken.setPath("/");
-            response.addCookie(jwtToken);
-        } catch (Exception e) {
-            result.setSuccess(false);
-            result.setMessage("Email or password is incorrect!");
-        }
-        return ResponseEntity.ok(result);
     }
 }
