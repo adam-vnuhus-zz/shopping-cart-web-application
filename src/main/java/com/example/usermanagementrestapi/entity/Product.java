@@ -15,20 +15,21 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="product")
+@Table(name = "product")
 @TypeDef(
         name = "json",
         typeClass = JsonStringType.class
 )
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
 
-    @Column(name="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
+    //Main image
     @Column(name = "thumbnail")
     private String thumbnail;
 
@@ -36,7 +37,6 @@ public class Product {
     @Column(name = "engine", columnDefinition = "json")
     private Engine engine;
 
-    @Column(name = "description")
     private String description;
 
     @Column(name = "create_date", updatable = false)
@@ -45,8 +45,14 @@ public class Product {
     @Column(name = "stock_amount")
     private int stockAmount;
 
-    @Column(name = "price")
-    private float price;
+    private double price;
+    @OneToMany(mappedBy = "product")
+    private List<OrderItem> orderItems;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @OneToMany(mappedBy = "product")
+    private List<Images> images;
 
     @Getter
     @Setter
@@ -58,18 +64,5 @@ public class Product {
 
         private String type;
     }
-
-    @ManyToMany(mappedBy = "products")
-    private List<Order> orders;
-
-    @ManyToMany(mappedBy = "products")
-    private List<Cart> carts;
-
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
-    private Category category;
-
-    @OneToMany(mappedBy = "product")
-    private List<Images> images;
 
 }

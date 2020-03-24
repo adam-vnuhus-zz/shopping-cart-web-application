@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 
 @NamedNativeQuery(
         name = "getUserInfo",
@@ -19,23 +18,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user")
-public class User {
+@Table(name = "user")
+public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
+    private String address;
+
     @NotNull
-    @Column(name="email", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name="phone", length = 11)
+    @Column(name = "phone", length = 11)
     private String phone;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="full_name")
+    @Column(name = "full_name")
     private String fullName;
 
 //    @Column(name="avatar")
@@ -47,6 +49,6 @@ public class User {
     @Column(name = "role", nullable = false, columnDefinition = "varchar(255) default 'USER'")
     private String role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "user")
+//    private List<Order> orders;
 }
