@@ -5,19 +5,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+@Setter
+@Getter
+@NoArgsConstructor
+public class CartItemDto {
 
     private int id;
 
-    private String name;
+    private int productId;
 
-    private String email;
+    private String guid;
 
-    private String phone;
+    private String username;
 
-//    private Date birthday;
+    private int amount;
 }

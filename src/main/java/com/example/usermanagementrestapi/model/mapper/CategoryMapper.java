@@ -10,8 +10,11 @@ public class CategoryMapper {
     public static CategoryDto toCategoryDto(Category category) {
 
         CategoryDto tmp = new CategoryDto();
+
         tmp.setCategoryId(category.getCategoryId());
-        tmp.setBrand(category.getBrand());
+        tmp.setName(category.getBrand());
+        tmp.setDescription(category.getDescription());
+        tmp.setCreatedDate(new Date());
 
         return tmp;
     }
@@ -19,10 +22,24 @@ public class CategoryMapper {
     //Test api
     public static Category toCategory(CategoryDto categoryDto){
 
-        Category category = new Category();
-        category.setBrand(categoryDto.getBrand());
-        category.setCreatedDate(new Date());
+        Category tmp = new Category();
 
-        return category;
+        tmp.setBrand(categoryDto.getName());
+        tmp.setDescription(categoryDto.getDescription());
+        tmp.setCreatedDate(new Date());
+
+        return tmp;
+    }
+
+    public static Category toCategory(CategoryDto categoryDto,int categoryId){
+
+        Category tmp = new Category();
+
+        tmp.setCategoryId(categoryId);
+        tmp.setBrand(categoryDto.getName());
+        tmp.setDescription(categoryDto.getDescription());
+        tmp.setCreatedDate(new Date());
+
+        return tmp;
     }
 }

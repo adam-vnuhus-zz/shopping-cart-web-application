@@ -1,5 +1,6 @@
 package com.example.usermanagementrestapi.model.dto;
 
+import com.example.usermanagementrestapi.extension.CustomDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +17,10 @@ public class CategoryDto {
 
     private int categoryId;
 
-    private String brand;
+    private String name;
 
-    @JsonSerialize
+    private String description;
+
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date createdDate;
 }
