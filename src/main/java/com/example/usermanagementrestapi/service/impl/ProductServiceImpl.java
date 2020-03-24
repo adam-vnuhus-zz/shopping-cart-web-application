@@ -1,12 +1,14 @@
-package com.example.usermanagementrestapi.service;
+package com.example.usermanagementrestapi.service.impl;
 
 import com.example.usermanagementrestapi.entity.Product;
 import com.example.usermanagementrestapi.exception.DuplicateRecordException;
+import com.example.usermanagementrestapi.exception.InternalServerException;
 import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.ProductDto;
 import com.example.usermanagementrestapi.model.mapper.ProductMapper;
 import com.example.usermanagementrestapi.repository.CategoryRepository;
 import com.example.usermanagementrestapi.repository.ProductRepository;
+import com.example.usermanagementrestapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,20 +29,24 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getListProduct() {
-        List<Product> products = productRepository.findAll();
 
-        List<ProductDto> rs = new ArrayList<ProductDto>();
+        List<Product> products = productRepository.findAll();
+        List<ProductDto> rs = new ArrayList<>();
+
         for (Product product : products) {
             rs.add(ProductMapper.toProductDto(product));
         }
+
         return rs;
     }
 
     @Override
-    public ProductDto getProductById(int id) {
-        Optional<Product> product = productRepository.findById(id);
+    public ProductDto getProductById(int productId) {
+
+        Optional<Product> product = productRepository.findById(productId);
+
         if (product.isEmpty()) {
-            throw new NotFoundException("No product found");
+            throw new NotFoundException("Không tìm thấy sản phẩm");
         }
 
         return ProductMapper.toProductDto(product.get());
@@ -54,20 +60,55 @@ public class ProductServiceImpl implements ProductService {
         for (Product product : products) {
             productDtos.add(ProductMapper.toProductDto(product));
         }
+
         return productDtos;
     }
 
     @Override
     public Product getOne(int productId) {
 
-        Product product = productRepository.getOne(productId);
+        return productRepository.getOne(productId);
+    }
 
-        return product;
+    @Override
+    public void deleteProduct(int productId) {
+
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (product.isEmpty()) {
+            throw new NotFoundException("No product found");
+        }
+        try {
+            productRepository.deleteById(productId);
+        } catch (Exception ex) {
+            throw new InternalServerException("Database error. Can't delete product");
+        }
+    }
+
+    @Override
+    public ProductDto updateProduct(ProductDto productDto, int productId) {
+
+        Optional<Product> product = productRepository.findById(productId);
+
+        if (product.isEmpty()) {
+            throw new NotFoundException("No product found");
+        }
+
+        Product updateProduct = ProductMapper.toProduct(productDto, productId);
+        updateProduct.setCategory(categoryRepository.getOne(productDto.getCategoryId()));
+
+        try {
+            productRepository.save(updateProduct);
+        } catch (Exception e) {
+            throw new InternalServerException("Database error. Can't update product");
+        }
+
+        return ProductMapper.toProductDto(updateProduct);
     }
 
     @Override
     public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable, Integer categoryId, String productName) {
-        return null;
+        return productRepository.getListProductByCategoryOrProductNameContaining(pageable, categoryId, productName);
     }
 
     //Test api
@@ -83,6 +124,7 @@ public class ProductServiceImpl implements ProductService {
         product = ProductMapper.toProduct(productDto);
         product.setCategory(categoryRepository.getOne(productDto.getCategoryId()));
         productRepository.save(product);
+
         return ProductMapper.toProductDto(product);
     }
 }

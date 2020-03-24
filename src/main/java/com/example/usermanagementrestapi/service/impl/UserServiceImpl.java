@@ -1,4 +1,4 @@
-package com.example.usermanagementrestapi.service;
+package com.example.usermanagementrestapi.service.impl;
 
 import com.example.usermanagementrestapi.entity.User;
 import com.example.usermanagementrestapi.exception.DuplicateRecordException;
@@ -9,6 +9,7 @@ import com.example.usermanagementrestapi.model.mapper.UserMapper;
 import com.example.usermanagementrestapi.model.request.CreateUserReq;
 import com.example.usermanagementrestapi.model.request.UpdateUserReq;
 import com.example.usermanagementrestapi.repository.UserRepository;
+import com.example.usermanagementrestapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,9 +19,11 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Component
-public class UserServiceImpl implements com.example.usermanagementrestapi.service.UserService {
+public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -42,7 +45,7 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     public List<UserDto> getListUser() {
         List<User> users = userRepository.findAll();
 
-        List<UserDto> rs = new ArrayList<UserDto>();
+        List<UserDto> rs = new ArrayList<>();
         for (User user : users) {
             rs.add(UserMapper.toUserDto(user));
         }
@@ -51,25 +54,56 @@ public class UserServiceImpl implements com.example.usermanagementrestapi.servic
     }
 
     @Override
-    public UserDto getUserById(int id) {
+    public User getUserById(int id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isEmpty()) {
             throw new NotFoundException("No user found");
         }
 
-        return UserMapper.toUserDto(user.get());
+        return user.get();
+    }
+
+    @Override
+    public UserDto createUser(UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+
+        try {
+            userRepository.save(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public UserDto removeUser(int id) {
+        return null;
+    }
+
+    @Override
+    public User findByUseremail(String email) {
+
+        return StreamSupport
+                .stream(userRepository.findByUseremail(email).spliterator(), false)
+                .findFirst().orElse(null);
     }
 
     @Override
     public Page<User> findUserLikeName(String name, int page) {
-        Page<User> rs = userRepository.findUserByName(name, PageRequest.of(page,10, Sort.by("id").descending()));
+        Page<User> rs = userRepository.findUserByName(name, PageRequest.of(page, 10, Sort.by("id").descending()));
         return rs;
     }
 
     @Override
     public UserDto updateUser(UpdateUserReq req, int id) {
         Optional<User> user = userRepository.findById(id);
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             throw new NotFoundException("No user found");
         }
 

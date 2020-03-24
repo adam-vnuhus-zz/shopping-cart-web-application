@@ -1,4 +1,4 @@
-package com.example.usermanagementrestapi.service;
+package com.example.usermanagementrestapi.service.impl;
 
 import com.example.usermanagementrestapi.entity.Images;
 import com.example.usermanagementrestapi.exception.InternalServerException;
@@ -7,6 +7,7 @@ import com.example.usermanagementrestapi.model.dto.ImageDto;
 import com.example.usermanagementrestapi.model.mapper.ImageMapper;
 import com.example.usermanagementrestapi.repository.ImageRepository;
 import com.example.usermanagementrestapi.repository.ProductRepository;
+import com.example.usermanagementrestapi.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class ImageServiceImpl implements ImageService {
 
         List<Images> imagesList = imageRepository.findAll();
         List<ImageDto> imageDtoS = new ArrayList<>();
-        for (Images images: imagesList) {
+        for (Images images : imagesList) {
             imageDtoS.add(ImageMapper.toImageDto(images));
         }
 
@@ -39,7 +40,7 @@ public class ImageServiceImpl implements ImageService {
     public ImageDto getImagetById(int imageId) {
 
         Optional<Images> images = imageRepository.findById(imageId);
-        if (!images.isPresent()){
+        if (images.isEmpty()) {
             throw new NotFoundException("No images found");
         }
 
@@ -60,7 +61,7 @@ public class ImageServiceImpl implements ImageService {
     public ImageDto updateImage(ImageDto imageDto, int imageId) {
 
         Optional<Images> images = imageRepository.findById(imageId);
-        if (!images.isPresent()) {
+        if (images.isEmpty()) {
             throw new NotFoundException("No images found");
         }
 
@@ -79,7 +80,7 @@ public class ImageServiceImpl implements ImageService {
     public void deleteImage(int imageId) {
 
         Optional<Images> images = imageRepository.findById(imageId);
-        if (!images.isPresent()) {
+        if (images.isEmpty()) {
             throw new NotFoundException("No images found");
         }
         try {

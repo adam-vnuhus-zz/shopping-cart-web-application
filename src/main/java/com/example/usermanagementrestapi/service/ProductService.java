@@ -10,19 +10,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface ProductService  {
+public interface ProductService {
 
-    public List<ProductDto> getListProduct();
+    List<ProductDto> getListProduct();
 
-    public ProductDto getProductById(int id);
+    ProductDto getProductById(int productId);
 
-    public List<ProductDto> getListProductNew();
+    List<ProductDto> getListProductNew();
 
-    public Product getOne(int productId);
+    Product getOne(int productId);
 
-    public Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable,
-                                                                         @Param("categoryId") Integer categoryId,
-                                                                         @Param("productName") String productName);
+    void deleteProduct(int productId);
+
+    ProductDto updateProduct(ProductDto productDto, int productId);
+
+    Page<Product> getListProductByCategoryOrProductNameContaining(Pageable pageable,
+                                                                  @Param("categoryId") Integer categoryId,
+                                                                  @Param("productName") String productName);
 
     //Test api
     ProductDto createProduct(ProductDto productDto);
