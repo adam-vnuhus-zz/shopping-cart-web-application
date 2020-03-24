@@ -1,7 +1,9 @@
 package com.example.usermanagementrestapi.controller;
 
+import com.example.usermanagementrestapi.entity.User;
 import com.example.usermanagementrestapi.exception.NotFoundException;
 import com.example.usermanagementrestapi.model.dto.UserDto;
+import com.example.usermanagementrestapi.model.mapper.UserMapper;
 import com.example.usermanagementrestapi.model.request.CreateUserReq;
 import com.example.usermanagementrestapi.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -77,8 +79,8 @@ public class UserController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable int id) {
-        UserDto result = userService.getUserById(id);
-        return ResponseEntity.ok(result);
+        User result = userService.getUserById(id);
+        return ResponseEntity.ok(UserMapper.toUserDto(result));
     }
 
     @ApiOperation(value = "Update user", response = UserDto.class)
