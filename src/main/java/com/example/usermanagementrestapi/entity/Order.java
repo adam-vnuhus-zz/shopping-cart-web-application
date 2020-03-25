@@ -20,32 +20,31 @@ import java.util.List;
 public class Order implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
 
-    @Column(name = "guid")
+
     private String guid;
 
-    @Column(name = "username")
+
     private String username;
 
-    @Column(name = "customer_name")
+
     private String customerName;
 
-    @Column(name = "status")
+
     private int status;
 
-    @Column(name = "ship_address")
+
     private String shipAddress;
 
-    @Column(name = "phone_number")
+
     private String phoneNumber;
 
-    @Column(name = "email")
+
     private String email;
 
-    @Column(name = "total_money")
+
     private double totalMoney;
 
     private Date createdDate;

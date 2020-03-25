@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-    Category findAllByName(String name);
+    Category findAllByBrand(String brand);
 
     @Query("SELECT c FROM Category c " +
             "WHERE (:categoryName IS NULL OR UPPER(c.brand) LIKE CONCAT('%',UPPER(:categoryName),'%'))")

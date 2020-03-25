@@ -39,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
 
-        Category category = categoryRepository.findAllByName(categoryDto.getName());
+        Category category = categoryRepository.findAllByBrand(categoryDto.getName());
         if (category != null) {
             throw new DuplicateRecordException("Ten danh muc da ton tai");
         }

@@ -15,24 +15,22 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "cart")
 //OrderProduct
 public class OrderItem implements Serializable {
 
     //orderProductId
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_item_id")
     private int orderItemId;
 
-    @Column(name = "amount")
+
     private int amount;
 
-    @Column(name = "price")
+
     private double price;
 
     @CreationTimestamp
-    @Column(name = "created_date", updatable = false)
+    @Column( updatable = false)
     private Date createdDate;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

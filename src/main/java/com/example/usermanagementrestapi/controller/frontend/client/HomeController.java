@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/client")
+@RequestMapping("/frontend/client")
 //public class HomeController extends BaseController {
 public class HomeController {
 
@@ -32,7 +32,7 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/home")
+    @GetMapping("")
     public String home(Model model,
                        @ModelAttribute("productname") ProductViewModel productName,
                        HttpServletResponse response,

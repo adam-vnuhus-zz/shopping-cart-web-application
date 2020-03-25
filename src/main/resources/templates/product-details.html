@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -258,7 +258,7 @@
                                         <div class="tab-pane active" id="pro-details1">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl1.jpg">
-                                                    <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/l1.jpg" alt="">
+                                                    <img th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}" th:attr="data-zoom-image=${productDetailViewModel.getProductViewModel().getThumbnail()}" alt="abc">
                                                 </a>
                                             </div>
                                         </div>
