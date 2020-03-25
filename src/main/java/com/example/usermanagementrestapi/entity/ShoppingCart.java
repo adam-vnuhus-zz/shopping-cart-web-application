@@ -14,20 +14,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "shopping_cart")
 public class ShoppingCart {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "shopping_cart_id")
     private int shoppingCartId;
 
-    @Column(name = "guid")
     private String guid;
 
-    @Column(name = "username")
     private String username;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shopping_cart")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shoppingCart")
     private List<CartItem> listCartProducts = new ArrayList<>();
 }

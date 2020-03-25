@@ -7,6 +7,7 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
 @TypeDef(
         name = "json",
         typeClass = JsonStringType.class
@@ -26,33 +26,36 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     //Main image
-    @Column(name = "thumbnail")
+    
     private String thumbnail;
 
     @Type(type = "json")
-    @Column(name = "engine", columnDefinition = "json")
+    @Column( columnDefinition = "json")
     private Engine engine;
 
     private String description;
 
-    @Column(name = "create_date", updatable = false)
+    @Column(updatable = false)
     private Date createDate;
 
-    @Column(name = "stock_amount")
+
     private int stockAmount;
 
     private double price;
+
     @OneToMany(mappedBy = "product")
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
     @OneToMany(mappedBy = "product")
-    private List<Images> images;
+    private List<Images> images = new ArrayList<>();
 
     @Getter
     @Setter
