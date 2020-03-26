@@ -19,5 +19,9 @@ public class UserDto {
 
     private String phone;
 
+    private String password;
+
+    private String address;
+
 //    private Date birthday;
 }

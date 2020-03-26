@@ -15,6 +15,7 @@ public class UserMapper {
 //        tmp.setAvatar(user.getAvatar());
         tmp.setEmail(user.getEmail());
 //        tmp.setBirthday(user.getBirthday());
+        tmp.setAddress(user.getAddress());
 
         return tmp;
     }
@@ -23,7 +24,8 @@ public class UserMapper {
         User user = new User();
         user.setFullName(req.getName());
         user.setEmail(req.getEmail());
-        user.setPhone(req.getPhone());
+
+        user.setAddress(req.getAddress());
         // Hash password using BCrypt
         String hash = BCrypt.hashpw(req.getPassword(), BCrypt.gensalt(12));
         user.setPassword(hash);

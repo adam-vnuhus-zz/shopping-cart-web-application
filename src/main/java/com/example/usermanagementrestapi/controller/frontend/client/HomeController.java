@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/frontend/client")
 //public class HomeController extends BaseController {
-public class HomeController {
+public class HomeController extends BaseController {
 
     @Autowired
     private CategoryService categoryService;
@@ -39,7 +39,7 @@ public class HomeController {
                        HttpServletRequest request,
                        final Principal principal){
 
-//        this.checkCookie(response,request,principal);
+        this.checkCookie(response,request,principal);
 
         HomeViewModel homeViewModel = new HomeViewModel();
 

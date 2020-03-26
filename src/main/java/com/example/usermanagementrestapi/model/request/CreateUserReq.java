@@ -51,4 +51,6 @@ public class CreateUserReq {
             required=true
     )
     private String phone;
+
+    private String address;
 }

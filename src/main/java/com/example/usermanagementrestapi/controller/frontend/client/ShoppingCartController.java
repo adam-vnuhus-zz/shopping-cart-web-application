@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
-public class ShoppingCartController {
+public class ShoppingCartController extends BaseController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
@@ -36,7 +36,7 @@ public class ShoppingCartController {
                        HttpServletRequest request,
                        Principal principal) {
 
-//        this.checkCookie(response, request, principal);
+        this.checkCookie(response, request, principal);
 
         ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel();
         int productAmount = 0;
