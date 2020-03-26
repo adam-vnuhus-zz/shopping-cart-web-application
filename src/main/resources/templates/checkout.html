@@ -1,9 +1,9 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Checkout | Oswan - eCommerce HTML5 Template</title>
+        <title>Oswan - eCommerce HTML5 Template</title>
         <meta name="description" content="Live Preview Of Oswan eCommerce HTML5 Template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->
@@ -234,7 +234,7 @@
                     </div>
                 </div>
             </header>
-            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
+            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
                         <h2>checkout page</h2>
@@ -252,7 +252,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="coupon-accordion">
+                            <div style="display: none" class="coupon-accordion">
                                 <!-- ACCORDION START -->
                                 <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
                                 <div id="checkout-login" class="coupon-content">
@@ -297,13 +297,16 @@
                             </div>
                         </div>
                     </div>
+
+
+
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-12">
-                            <form action="#">
+                            <form th:action="@{/order/checkout}" method="post" th:object="${orderViewModel}">
                                 <div class="checkbox-form">						
                                     <h3>Billing Details</h3>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div style="display: none" class="col-md-12">
                                             <div class="country-select">
                                                 <label>Country <span class="required">*</span></label>
                                                 <select>
@@ -318,48 +321,52 @@
                                                 </select> 										
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div style="display: none" class="col-md-6">
                                             <div class="checkout-form-list">
-                                                <label>First Name <span class="required">*</span></label>										
-                                                <input type="text" placeholder="" />
+                                                <label>Full Name <span class="required">*</span></label>
+                                                <input type="text" placeholder=""
+                                                       id="input-name"th:field="*{customerName}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div style="display: none" class="col-md-6">
                                             <div class="checkout-form-list">
                                                 <label>Last Name <span class="required">*</span></label>										
                                                 <input type="text" placeholder="" />
                                             </div>
                                         </div>
+
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
-                                                <label>Company Name</label>
-                                                <input type="text" placeholder="" />
+                                                <label>Full Name <span class="required">*</span></label>
+                                                <input type="text" placeholder=""
+                                                       id="input-name"th:field="*{customerName}">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" />
+                                                <input type="text" placeholder="Street address"
+                                                       id="input-address" th:field="*{address}"/>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div style="display: none" class="col-md-12">
                                             <div class="checkout-form-list">									
                                                 <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div style="display: none" class="col-md-12">
                                             <div class="checkout-form-list">
                                                 <label>Town / City <span class="required">*</span></label>
                                                 <input type="text" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div style="display: none" class="col-md-6">
                                             <div class="checkout-form-list">
                                                 <label>State / County <span class="required">*</span></label>										
                                                 <input type="text" placeholder="" />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div style="display: none" class="col-md-6">
                                             <div class="checkout-form-list">
                                                 <label>Postcode / Zip <span class="required">*</span></label>										
                                                 <input type="text" />
@@ -368,16 +375,18 @@
                                         <div class="col-md-6">
                                             <div class="checkout-form-list">
                                                 <label>Email Address <span class="required">*</span></label>										
-                                                <input type="email" />
+                                                <input type="email"
+                                                       id="input-email" th:field="*{email}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="checkout-form-list">
                                                 <label>Phone  <span class="required">*</span></label>										
-                                                <input type="text" />
+                                                <input type="text"
+                                                       id="input-phone-number" th:field="*{phoneNumber}"/>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div style="display: none" class="col-md-12">
                                             <div class="checkout-form-list create-acc">	
                                                 <input id="cbox" type="checkbox" />
                                                 <label>Create an account?</label>
@@ -389,7 +398,7 @@
                                             </div>
                                         </div>								
                                     </div>
-                                    <div class="different-address">
+                                    <div style="display: none" class="different-address">
                                         <div class="ship-different-title">
                                             <h3>
                                                 <label>Ship to a different address?</label>
@@ -478,14 +487,17 @@
                                                 <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery." ></textarea>
                                             </div>									
                                         </div>
-                                    </div>													
+                                    </div>
+                                    <div class="order-button-payment">
+                                        <input type="submit" value="Place order" />
+                                    </div>
                                 </div>
                             </form>
                         </div>	
                         <div class="col-lg-6 col-md-12 col-12">
                             <div class="your-order">
-                                <h3>Your order</h3>
-                                <div class="your-order-table table-responsive">
+                                <h3 style="display: none">Your order</h3>
+                                <div style="display: none" class="your-order-table table-responsive">
                                     <table>
                                         <thead>
                                             <tr>
@@ -526,7 +538,7 @@
                                 </div>
                                 <div class="payment-method mt-40">
                                     <div class="payment-accordion">
-                                        <div class="panel-group" id="faq">
+                                        <div style="display: none" class="panel-group" id="faq">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <h5 class="panel-title"><a data-toggle="collapse" aria-expanded="true" data-parent="#faq" href="#payment-1">Direct Bank Transfer.</a></h5>
@@ -569,7 +581,7 @@
                 </div>
             </div>
             <!-- checkout-area end -->	
-            <div class="newsletter-area">
+            <div style="display: none" class="newsletter-area">
                 <div class="container">
                     <div class="newsletter-wrapper-all theme-bg-2">
                         <div class="row">
