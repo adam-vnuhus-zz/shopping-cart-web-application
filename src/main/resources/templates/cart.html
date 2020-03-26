@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -255,32 +255,41 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product-name">products</th>
-                                            <th class="product-price">products name</th>
-                                            <th class="product-name">price</th>
-                                            <th class="product-price">quantity</th>
-                                            <th class="product-quantity">total</th>
-                                            <th class="product-subtotal">delete</th>
+                                            <th class="product-name">Ảnh</th>
+                                            <th class="product-price">Tên sản phẩm</th>
+                                            <th class="product-name">Giá</th>
+                                            <th class="product-price">Số lượng</th>
+                                            <th class="product-quantity">Tổng giá</th>
+                                            <th class="product-subtotal">Xoá</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr th:each="cartProduct : ${shoppingCartViewModel.getCartItemViewModels()}">
                                             <td class="product-thumbnail">
-                                                <a href="#"><img src="http://preview.freethemescloud.com/oswan/assets/img/cart/4.jpg" alt=""></a>
+                                                <a href="#">
+                                                    <img th:src="${cartProduct.getThumbnail()}" width="100px" alt="this is a car"></a>
                                             </td>
                                             <td class="product-name">
-                                                <a href="#">Gloriori GSX 250 R</a>
+                                                <a href="#" th:text="${cartProduct.getProductName()}">Gloriori GSX 250 R</a>
                                             </td>
-                                            <td class="product-price"><span class="amount">$1128.00</span></td>
+                                            <td class="product-price">
+                                                <span th:text="${'$' + cartProduct.getPrice()}" class="amount">$1128.00</span></td>
                                             <td class="product-quantity">
                                                 <div class="quantity-range">
-                                                    <input class="input-text qty text" type="number" step="1" min="0" value="1" title="Qty" size="4">
+                                                    <input class="input-text qty text change-product-amount"
+                                                           th:value="${cartProduct.getAmount()}"
+                                                           type="number" step="1" min="0"
+                                                           value="1" title="Qty" size="4"
+                                                           th:attr="cartprodid=${cartProduct.getId()}">
                                                 </div>
                                             </td>
-                                            <td class="product-subtotal">$1128.00</td>
-                                            <td class="product-cart-icon product-subtotal"><a href="#"><i class="ti-trash"></i></a></td>
+                                            <td class="product-subtotal" th:text="${'$' + cartProduct.getTotalPrice()}">$1128.00</td>
+                                            <td class="product-cart-icon product-subtotal">
+                                                <a class="delete-cart-product"
+                                                   th:attr="cartprodid=${cartProduct.getId()}"
+                                                   href="#"><i class="ti-trash"></i></a></td>
                                         </tr>
-                                        <tr>
+                                        <tr style="display: none">
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="http://preview.freethemescloud.com/oswan/assets/img/cart/5.jpg" alt=""></a>
                                             </td>
@@ -296,7 +305,7 @@
                                             <td class="product-subtotal">$1450.00</td>
                                             <td class="product-cart-icon product-subtotal"><a href="#"><i class="ti-trash"></i></a></td>
                                         </tr>
-                                        <tr>
+                                        <tr style="display: none">
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="http://preview.freethemescloud.com/oswan/assets/img/cart/6.jpg" alt=""></a>
                                             </td>
@@ -312,7 +321,7 @@
                                             <td class="product-subtotal">$1300.00</td>
                                             <td class="product-cart-icon product-subtotal"><a href="#"><i class="ti-trash"></i></a></td>
                                         </tr>
-                                        <tr>
+                                        <tr style="display: none">
                                             <td class="product-thumbnail">
                                                 <a href="#"><img src="http://preview.freethemescloud.com/oswan/assets/img/cart/7.jpg" alt=""></a>
                                             </td>
@@ -337,16 +346,16 @@
                         <div class="col-md-12">
                             <div class="cart-shiping-update">
                                 <div class="cart-shipping">
-                                    <a class="btn-style cr-btn" href="#">
-                                        <span>continue shopping</span>
+                                    <a class="btn-style cr-btn" th:href="@{'/frontend/client'}">
+                                        <span>Tiếp tục mua </span>
                                     </a>
                                 </div>
                                 <div class="update-checkout-cart">
-                                    <div class="update-cart">
+                                    <div style="display: none" class="update-cart">
                                         <button class="btn-style cr-btn"><span>update</span></button>
                                     </div>
                                     <div class="update-cart">
-                                        <a class="btn-style cr-btn" href="#">
+                                        <a class="btn-style cr-btn" th:href="@{'/order/checkout'}">
                                             <span>checkout</span>
                                         </a>
                                     </div>
@@ -355,7 +364,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-7 col-sm-6">
+                        <div class="col-md-7 col-sm-6" style="display: none">
                             <div class="discount-code">
                                 <h4>enter your discount code</h4>
                                 <div class="coupon">
@@ -369,34 +378,39 @@
                                 <h3>cart total</h3>
                                 <ul>
                                     <li>
-                                        sub total
-                                        <span>$909.00</span>
+                                        Tổng
+                                        <span  th:text="${'$' + shoppingCartViewModel.getTotalPrice()}">$909.00</span>
                                     </li>
                                     <li>
+                                        Tổng số sản phẩm
+                                        <span th:text="${shoppingCartViewModel.getProductAmount()}">$918.00</span>
+                                    </li>
+                                    <li style="display: none">
                                         tax
                                         <span>$9.00</span>
                                     </li>
-                                    <li class="order-total">
+                                    <li class="order-total"
+                                        style="display: none">
                                         shipping
                                         <span>0</span>
                                     </li>
-                                    <li>
+                                    <li style="display: none">
                                         order total
                                         <span>$918.00</span>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="cart-btn text-center mb-15">
+                            <div class="cart-btn text-center mb-15" style="display: none">
                                 <a href="#">payment</a>
                             </div>
-                            <div class="continue-shopping-btn text-center">
+                            <div class="continue-shopping-btn text-center" style="display: none">
                                 <a href="#">continue shopping</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="newsletter-area">
+            <div class="newsletter-area" style="display: none">
                 <div class="container">
                     <div class="newsletter-wrapper-all theme-bg-2">
                         <div class="row">
@@ -564,5 +578,10 @@
         <script src="/js/owl.carousel.min.js"></script>
         <script src="/js/plugins.js"></script>
         <script src="/js/main.js"></script>
+
+        <script th:src="@{/js/client/js/cart.js}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     </body>
 </html>

@@ -23,4 +23,6 @@ public class CartItemViewModel {
 
     private String price;
 
+    private String totalPrice;
+
 }

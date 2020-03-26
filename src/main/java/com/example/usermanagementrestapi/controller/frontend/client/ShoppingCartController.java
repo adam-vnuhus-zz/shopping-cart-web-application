@@ -50,17 +50,21 @@ public class ShoppingCartController extends BaseController {
             if (principal != null) {
                 ShoppingCart shoppingCartEntity = shoppingCartService.findByUserName(username);
                 if (shoppingCartEntity != null) {
-                    productAmount = shoppingCartEntity.getListCartProducts().size();
+//                    productAmount = shoppingCartEntity.getListCartProducts().size();
                     for (CartItem cartItem : shoppingCartEntity.getListCartProducts()) {
+                        double temp = 0;
                         CartItemViewModel cartItemViewModel = new CartItemViewModel();
                         cartItemViewModel.setId(cartItem.getCartItemId());
                         cartItemViewModel.setProductId(cartItem.getProduct().getProductId());
                         cartItemViewModel.setProductName(cartItem.getProduct().getName());
                         cartItemViewModel.setThumbnail(cartItem.getProduct().getThumbnail());
                         cartItemViewModel.setAmount(cartItem.getAmount());
+                        temp = cartItem.getProduct().getPrice();
+                        cartItemViewModel.setPrice(df.format(temp));
                         double price = cartItem.getAmount() * cartItem.getProduct().getPrice();
-                        cartItemViewModel.setPrice(df.format(price));
+                        cartItemViewModel.setTotalPrice(df.format(price));
                         totalPrice += price;
+                        productAmount += cartItem.getAmount();
                         cartItemViewModels.add(cartItemViewModel);
                     }
                 }
