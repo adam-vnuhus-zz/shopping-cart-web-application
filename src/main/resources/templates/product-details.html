@@ -10,7 +10,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
 		
 		<!-- all css here -->
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
         <link rel="stylesheet" href="/css/animate.css">
         <link rel="stylesheet" href="/css/owl.carousel.min.css">
         <link rel="stylesheet" href="/css/chosen.min.css">
@@ -257,15 +257,15 @@
                                     <div class="product-details-large tab-content">
                                         <div class="tab-pane active" id="pro-details1">
                                             <div class="easyzoom easyzoom--overlay">
-                                                <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl1.jpg">
+                                                <a th:href="${productDetailViewModel.getProductViewModel().getThumbnail()}">
                                                     <img th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}" th:attr="data-zoom-image=${productDetailViewModel.getProductViewModel().getThumbnail()}" alt="abc">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="pro-details2">
                                             <div class="easyzoom easyzoom--overlay">
-                                                <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl2.jpg">
-                                                    <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/l2.jpg" alt="">
+                                                <a th:each=" productImg : ${productDetailViewModel.getProductViewModel().getImageViewModels()}" th:href="${productImg.getLink()}">
+                                                    <img th:src="${productImg.getLink()}" alt="This is a car">
                                                 </a>
                                             </div>
                                         </div>
@@ -292,8 +292,8 @@
                                         </div>
                                     </div>
                                     <div class="product-details-small nav mt-12 product-dec-slider owl-carousel">
-                                        <a class="active" href="#pro-details1">
-                                            <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s1.jpg" alt="">
+                                        <a class="active" th:each=" productImg : ${productDetailViewModel.getProductViewModel().getImageViewModels()}" href="#pro-details2">
+                                            <img th:src="${productImg.getLink()}" alt="This is a car">
                                         </a>
                                         <a href="#pro-details2">
                                             <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s2.jpg" alt="">
@@ -313,7 +313,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="product-details-content">
-                                <h2>Klager GSX 250 R</h2>
+                                <h2 th:text="${productDetailViewModel.getProductViewModel().getName()}" >Klager GSX 250 R</h2>
                                 <div class="quick-view-rating">
                                     <i class="fa fa-star reting-color"></i>
                                     <i class="fa fa-star reting-color"></i>
@@ -323,11 +323,14 @@
                                     <span> ( 01 Customer Review )</span>
                                 </div>
                                 <div class="product-price">
-                                    <span>$2549</span>
+                                    <span th:text="${'$' + productDetailViewModel.getProductViewModel().getPrice()}">$2549</span>
                                 </div>
                                 <div class="product-overview">
                                     <h5 class="pd-sub-title">Product Overview</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipic it, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercita tion ullamco laboris nisi ut aliquip ex ea commodo.</p>
+                                    <p th:text="${productDetailViewModel.getProductViewModel().getDescription()}">
+                                        Lorem ipsum dolor sit amet, consectetur adipic it, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercita tion ullamco laboris nisi ut aliquip ex ea commodo.</p>
                                 </div>
                                 <div class="product-color">
                                     <h5 class="pd-sub-title">Product color</h5>
@@ -340,12 +343,13 @@
                                         <li class="purple2">g</li>
                                     </ul>
                                 </div>
-                                <div class="quickview-plus-minus">
+                                <div class="quickview-plus-minus quantity">
                                     <div class="cart-plus-minus">
-                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                        <input type="number" value="1" name="qtybutton"
+                                               class="cart-plus-minus-box" id="getAmount">
                                     </div>
                                     <div class="quickview-btn-cart">
-                                        <a class="btn-style cr-btn" href="#"><span>add to cart</span></a>
+                                        <a class="btn-style cr-btn add-to-cart" th:attr="prodid=${productDetailViewModel.getProductViewModel().getId()}"><span>add to cart</span></a>
                                     </div>
                                     <div class="quickview-btn-wishlist">
                                         <a class="btn-hover cr-btn" href="#"><span><i class="icofont icofont-heart-alt"></i></span></a>
@@ -552,7 +556,7 @@
 		<!-- all js here -->
         <script src="/js/vendor/jquery-1.12.0.min.js"></script>
         <script src="/js/popper.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
         <script src="/js/isotope.pkgd.min.js"></script>
         <script src="/js/imagesloaded.pkgd.min.js"></script>
         <script src="/js/jquery.counterup.min.js"></script>
@@ -561,5 +565,10 @@
         <script src="/js/owl.carousel.min.js"></script>
         <script src="/js/plugins.js"></script>
         <script src="/js/main.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+        <script th:src="@{/js/client/js/product-detail.js}"></script>
     </body>
 </html>
