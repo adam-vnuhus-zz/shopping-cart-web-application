@@ -163,6 +163,7 @@ public class OrderController extends BaseController {
         DecimalFormat df = new DecimalFormat("###,###.###");
 
         double totalPrice = 0;
+        int itemAmount = 0;
 
         List<OrderItemViewModel> orderItemViewModels = new ArrayList<>();
 
@@ -179,6 +180,7 @@ public class OrderController extends BaseController {
 
                 orderItemViewModel.setPrice(df.format(orderItem.getPrice()));
 
+                itemAmount += orderItem.getAmount();
                 totalPrice += orderItem.getPrice();
 
                 orderItemViewModels.add(orderItemViewModel);
@@ -187,7 +189,7 @@ public class OrderController extends BaseController {
 
         orderDetailViewModel.setOrderItemViewModels(orderItemViewModels);
         orderDetailViewModel.setTotalPrice(df.format(totalPrice));
-        orderDetailViewModel.setTotalProduct(orderItemViewModels.size());
+        orderDetailViewModel.setTotalProduct(itemAmount);
 
         model.addAttribute("orderDetailViewModel",orderDetailViewModel);
 
