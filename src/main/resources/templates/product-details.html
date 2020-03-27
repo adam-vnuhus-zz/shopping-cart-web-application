@@ -314,7 +314,7 @@
                         <div class="col-lg-6">
                             <div class="product-details-content">
                                 <h2 th:text="${productDetailViewModel.getProductViewModel().getName()}" >Klager GSX 250 R</h2>
-                                <div class="quick-view-rating">
+                                <div style="display: none" class="quick-view-rating">
                                     <i class="fa fa-star reting-color"></i>
                                     <i class="fa fa-star reting-color"></i>
                                     <i class="fa fa-star reting-color"></i>
@@ -332,7 +332,7 @@
                                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                         quis nostrud exercita tion ullamco laboris nisi ut aliquip ex ea commodo.</p>
                                 </div>
-                                <div class="product-color">
+                                <div style="display: none" class="product-color">
                                     <h5 class="pd-sub-title">Product color</h5>
                                     <ul>
                                         <li class="red">b</li>
@@ -349,13 +349,14 @@
                                                class="cart-plus-minus-box" id="getAmount">
                                     </div>
                                     <div class="quickview-btn-cart">
-                                        <a class="btn-style cr-btn add-to-cart" th:attr="prodid=${productDetailViewModel.getProductViewModel().getId()}"><span>add to cart</span></a>
+                                        <a class="btn-style cr-btn add-to-cart" th:attr="prodid=${productDetailViewModel.getProductViewModel().getId()}"
+                                           style="cursor: pointer"><span>add to cart</span></a>
                                     </div>
-                                    <div class="quickview-btn-wishlist">
+                                    <div style="display: none" class="quickview-btn-wishlist">
                                         <a class="btn-hover cr-btn" href="#"><span><i class="icofont icofont-heart-alt"></i></span></a>
                                     </div>
                                 </div>
-                                <div class="product-categories">
+                                <div style="display: none" class="product-categories">
                                     <h5 class="pd-sub-title">Categories</h5>
                                     <ul>
                                         <li>
@@ -375,7 +376,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="product-share">
+                                <div style="display: none" class="product-share">
                                     <h5 class="pd-sub-title">Share</h5>
                                     <ul>
                                         <li>
@@ -397,7 +398,7 @@
                     </div>
                 </div>
             </div>
-            <div class="newsletter-area">
+            <div style="display: none" class="newsletter-area">
                 <div class="container">
                     <div class="newsletter-wrapper-all theme-bg-2">
                         <div class="row">
