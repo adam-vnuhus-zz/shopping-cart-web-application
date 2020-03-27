@@ -59,7 +59,8 @@
                                                             <li><a href="cart.html">cart</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="#">pages</a>
+                                                    <li>
+                                                        <a href="#">pages</a>
                                                         <ul>
                                                             <li><a href="about-us.html">about us</a></li>
                                                             <li><a href="cart.html">cart page</a></li>
@@ -69,19 +70,34 @@
                                                             <li><a href="contact.html">contact</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="#">blog</a>
-                                                        <ul>
-                                                            <li><a href="blog.html">blog</a></li>
-                                                            <li><a href="blog-details.html">blog details</a></li>
+                                                    <li>
+                                                        <a sec:authorize="isAuthenticated()" style="text-transform: lowercase">
+                                                            [[${#httpServletRequest.remoteUser}]]
+                                                        </a>
+                                                        <ul sec:authorize="hasRole('ADMIN')" class="ht-dropdown ht-my_account">
+                                                                <li><a th:href="@{/admin/home}">Trang quản trị</a></li>
+                                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                                <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                                        </ul>
+                                                        <ul sec:authorize="hasRole('USER')" class="ht-dropdown ht-my_account">
+                                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                                <li><a th:href="@{'/order/history'}">Lịch sử đơn hàng</a></li>
+                                                                <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="contact.html">contact us</a></li>
+                                                    <li>
+                                                        <a sec:authorize="isAnonymous()">Đăng nhập</a>
+                                                        <ul class="ht-dropdown ht-my_account">
+                                                            <li><a href="/register">Đăng ký</a></li>
+                                                            <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
+                                                        </ul>
+                                                    </li>
                                                 </ul>
                                             </nav>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="header-cart cart-small-device">
+                                <div style="display: none" class="header-cart cart-small-device">
                                     <button class="icon-cart">
                                         <i class="ti-shopping-cart"></i>
                                         <span class="count-style">02</span>
@@ -149,33 +165,61 @@
                                                     <li><a href="cart.html">cart page</a></li>
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="login-register.html">login</a></li>
+                                                    <li>
+                                                        <li><a sec:authorize="isAnonymous()">Đăng nhập</a>
+                                                            <ul class="ht-dropdown ht-my_account">
+                                                                <li><a href="/register">Đăng ký</a></li>
+                                                                <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </li>
                                                     <li><a href="contact.html">contact</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">shop</a>
+                                            <li><a th:href="@{/products/list}">shop</a>
                                                 <ul>
-                                                    <li><a href="shop.html">shop</a></li>
-                                                    <li><a href="product-details.html">product details</a></li>
-                                                    <li><a href="checkout.html">checkout</a></li>
-                                                    <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
+                                                    <li><a th:href="@{/products/list}">shop</a></li>
+                                                    <li style="display: none"><a th:href="@{/cart/add}">product details</a></li>
+                                                    <li><a th:href="@{/order/checkout}">checkout</a></li>
+                                                    <li style="display: none"><a href="wishlist.html">wishlist</a></li>
+                                                    <li><a th:href="@{/cart/add}">cart</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">BLOG</a>
-                                                <ul>
-                                                    <li><a href="blog.html">blog page</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
+                                            <li><a sec:authorize="isAnonymous()">Đăng nhập<i class="fa fa-chevron-down"></i></a>
+                                                <ul class="ht-dropdown ht-my_account">
+                                                    <li><a href="/register">Đăng ký</a></li>
+                                                    <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html"> Contact us</a></li>
+                                            <li>
+                                                <a sec:authorize="isAuthenticated()" style="text-transform: lowercase">
+                                                    [[${#httpServletRequest.remoteUser}]]
+                                                    <i class="fa fa-chevron-down"></i></a>
+                                                <div sec:authorize="hasRole('ADMIN')">
+                                                    <ul class="ht-dropdown ht-my_account">
+                                                        <li><a th:href="@{/admin/home}">Trang quản trị</a></li>
+                                                        <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                        <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div sec:authorize="hasRole('USER')">
+                                                    <ul class="ht-dropdown ht-my_account">
+                                                        <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                        <li><a th:href="@{'/order/history'}">Lịch sử đơn hàng</a></li>
+                                                        <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li>
+
+                                            </li>
                                         </ul>
                                     </nav>							
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="header-cart-wrapper">
+                    <div style="display: none" class="header-cart-wrapper">
                         <div class="header-cart">
                             <button class="icon-cart">
                                 <i class="ti-shopping-cart"></i>

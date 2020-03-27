@@ -257,9 +257,10 @@
                                 <div class="sidebar-widget pb-55">
                                     <h3 class="sidebar-widget">Search Products</h3>
                                     <div class="sidebar-search">
-                                        <form action="#">
-                                            <input type="text" placeholder="Search Products...">
-                                            <button><i class="ti-search"></i></button>
+                                        <form th:action="@{/products/list}" th:object="${productname}"
+                                              method="get" class="hm-searchbox">
+                                            <input type="text" th:field="*{name}" placeholder="Search Products...">
+                                            <button class="li-btn" type="submit"><i class="ti-search"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -387,7 +388,7 @@
                                             <select class="select">
                                                 <option value="">Default softing </option>
                                                 <option value="">Sort by news</option>
-                                                <option value="">Sort by price</option>
+                                                <option value="">Sort by price </option>
                                             </select>
                                         </form>
                                     </div>
@@ -2051,7 +2052,8 @@
                     </div>
                 </div>
             </div>
-            <div class="newsletter-area">
+            <!---->
+            <div style="display: none" class="newsletter-area">
                 <div class="container">
                     <div class="newsletter-wrapper-all theme-bg-2">
                         <div class="row">
