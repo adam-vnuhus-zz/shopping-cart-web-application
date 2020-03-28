@@ -25,7 +25,9 @@
     </head>
     <body>
         <div class="wrapper">
-            <header>
+            <!---->
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -234,15 +236,15 @@
                     </div>
                 </div>
             </header>
-            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(/img/banner/banner-4.jpg)">
+            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
-                        <h2>login / register</h2>
+                        <h2>login</h2>
                         <ul>
                             <li>
                                 <a href="#">home</a>
                             </li>
-                            <li>login register</li>
+                            <li>login</li>
                         </ul>
                     </div>
                 </div>
@@ -270,7 +272,7 @@
                                                     <input type="password" name="user-password" placeholder="Password"
                                                            id="sign-in-password">
                                                     <div class="button-box">
-                                                        <div class="login-toggle-btn">
+                                                        <div style="display: none" class="login-toggle-btn">
                                                             <input type="checkbox">
                                                             <label>Remember me</label>
                                                             <a href="#">Forgot Password?</a>
@@ -287,13 +289,13 @@
                                             <div class="login-form">
                                               <!--  <form action="#" method="post">-->
 
-                                                    <input type="text" name="full-name" placeholder="Họ và tên" id="register-name">
-                                                    <input name="address" type="text" id="register-address" placeholder="Địa chỉ"/>
-                                                    <input name="phone" type="text" id="register-phone" placeholder="Số điện thoại"/>
+                                                    <input type="text" name="full-name" placeholder="Full Name" id="register-name">
+                                                    <input name="address" type="text" id="register-address" placeholder="Address"/>
+                                                    <input name="phone" type="text" id="register-phone" placeholder="Phone"/>
                                                     <input name="user-email" placeholder="Email" type="email" id="register-email">
                                                     <input type="password" name="user-password" placeholder="Password" id="register-password">
                                                     <input name="pwd_confirm" type="password"  id="register-password-confirmation"
-                                                           placeholder="Nhập lại mật khẩu"/>
+                                                           placeholder="Confirmation Password"/>
                                                     <div class="button-box">
                                                         <button  class="btn-style cr-btn" id="btn-register"
                                                                  style="cursor: pointer"><span>Register</span></button>
@@ -308,7 +310,7 @@
                     </div>
                 </div>
             </div>
-            <div class="newsletter-area">
+            <div style="display: none" class="newsletter-area">
                 <div class="container">
                     <div class="newsletter-wrapper-all theme-bg-2">
                         <div class="row">

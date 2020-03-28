@@ -6,6 +6,7 @@
         <title>Oswan - eCommerce HTML5 Template</title>
         <meta name="description" content="Live Preview Of Oswan eCommerce HTML5 Template">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
 		
@@ -22,17 +23,19 @@
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/responsive.css">
         <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+
     </head>
     <body>
         <div class="wrapper">
             <!-- header start -->
-            <header>
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-4">
                                 <div class="logo-small-device">
-                                    <a href="index.html"><img alt="" src="/img/logo/logo.png"></a>
+                                    <a th:href="@{/frontend/client}"><img alt="" src="/img/logo/logo.png"></a>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-8 col-8">
@@ -48,18 +51,21 @@
                                         <div class="main-menu">
                                             <nav>
                                                 <ul>
-                                                    <li><a href="index.html">home</a></li>
-                                                    <li class="active"><a href="about-us.html">about us </a></li>
-                                                    <li><a href="#">shop</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">shop</a></li>
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="checkout.html">checkout</a></li>
-                                                            <li><a href="wishlist.html">wishlist</a></li>
-                                                            <li><a href="cart.html">cart</a></li>
+                                                    <li><a th:href="@{/frontend/client}">home</a></li>
+                                                    <li style="display: none" class="active"><a href="about-us.html">about us </a></li>
+                                                    <li><a th:href="@{/products/list}">shop</a>
+                                                        <ul style="display: none">
+                                                            <li><a th:href="@{/products/list}">shop</a></li>
+                                                            <li style="display: none"><a href="product-details.html">product details</a></li>
+
+                                                            <li style="display: none"><a href="wishlist.html">wishlist</a></li>
+
                                                         </ul>
                                                     </li>
-                                                    <li>
+                                                    <li><a th:href="@{/cart/add}">cart</a></li>
+                                                    <li><a th:href="@{/order/checkout}">checkout</a></li>
+                                                    <li style="display: none"><a th:href="@{/order/history}">order history</a></li>
+                                                    <li style="display: none">
                                                         <a href="#">pages</a>
                                                         <ul>
                                                             <li><a href="about-us.html">about us</a></li>
@@ -81,15 +87,15 @@
                                                         </ul>
                                                         <ul sec:authorize="hasRole('USER')" class="ht-dropdown ht-my_account">
                                                                 <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
-                                                                <li><a th:href="@{'/order/history'}">Lịch sử đơn hàng</a></li>
-                                                                <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                                                <li><a th:href="@{'/order/history'}">Order History</a></li>
+                                                                <li class="active"><a th:href="@{/logout}">Logout</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
-                                                        <a sec:authorize="isAnonymous()">Đăng nhập</a>
+                                                        <a sec:authorize="isAnonymous()">Login</a>
                                                         <ul class="ht-dropdown ht-my_account">
-                                                            <li><a href="/register">Đăng ký</a></li>
-                                                            <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
+                                                            <li><a th:href="@{/register}">Register</a></li>
+                                                            <li class="active"><a th:href="@{/login}">Login</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -158,34 +164,30 @@
                                 <div class="mobile-menu">
                                     <nav id="mobile-menu-active">
                                         <ul class="menu-overflow">
-                                            <li><a href="index.html">HOME</a></li>
-                                            <li><a href="#">pages</a>
+                                            <li><a th:href="@{/frontend/client}">HOME</a></li>
+                                            <li style="display: none">
+                                                <a href="#">pages</a>
                                                 <ul>
                                                     <li><a href="about-us.html">about us</a></li>
                                                     <li><a href="cart.html">cart page</a></li>
                                                     <li><a href="checkout.html">checkout</a></li>
                                                     <li><a href="wishlist.html">wishlist</a></li>
-                                                    <li>
-                                                        <li><a sec:authorize="isAnonymous()">Đăng nhập</a>
-                                                            <ul class="ht-dropdown ht-my_account">
-                                                                <li><a href="/register">Đăng ký</a></li>
-                                                                <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </li>
                                                     <li><a href="contact.html">contact</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a th:href="@{/products/list}">shop</a>
-                                                <ul>
+                                            <li>
+                                                <a th:href="@{/products/list}">shop</a>
+                                                <ul style="display: none">
                                                     <li><a th:href="@{/products/list}">shop</a></li>
                                                     <li style="display: none"><a th:href="@{/cart/add}">product details</a></li>
-                                                    <li><a th:href="@{/order/checkout}">checkout</a></li>
+
                                                     <li style="display: none"><a href="wishlist.html">wishlist</a></li>
-                                                    <li><a th:href="@{/cart/add}">cart</a></li>
+
                                                 </ul>
                                             </li>
-                                            <li><a sec:authorize="isAnonymous()">Đăng nhập<i class="fa fa-chevron-down"></i></a>
+                                            <li><a th:href="@{/cart/add}">cart</a></li>
+                                            <li><a th:href="@{/order/checkout}">checkout</a></li>
+                                            <li><a sec:authorize="isAnonymous()">Đăng nhập</a>
                                                 <ul class="ht-dropdown ht-my_account">
                                                     <li><a href="/register">Đăng ký</a></li>
                                                     <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
@@ -211,7 +213,6 @@
                                                 </div>
                                             </li>
                                             <li>
-
                                             </li>
                                         </ul>
                                     </nav>							
@@ -279,6 +280,9 @@
                     </div>
                 </div>
             </header>
+
+            <!---->
+
             <div class="slider-area">
                 <div class="slider-active owl-carousel">
                     <div class="single-slider slider-1" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/slider/slider-bg.jpg)">
@@ -326,12 +330,13 @@
                 </div>
                 <div class="slider-social">
                     <ul>
-                        <li class="facebook"><a href="#"><i class="icofont icofont-social-facebook"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="icofont icofont-social-twitter"></i></a></li>
-                        <li class="pinterest"><a href="#"><i class="icofont icofont-social-pinterest"></i></a></li>
+                        <li class="facebook"><a href="https://www.facebook.com/"><i class="icofont icofont-social-facebook"></i></a></li>
+                        <li class="twitter"><a href="https://twitter.com/explore"><i class="icofont icofont-social-twitter"></i></a></li>
+                        <li class="pinterest"><a href="https://www.pinterest.com/"><i class="icofont icofont-social-pinterest"></i></a></li>
                     </ul>
                 </div>
-                <div class="language-currency-wrapper">
+
+                <div style="display: none" class="language-currency-wrapper">
                     <div class="language-currency">
                         <div class="language">
                             <select class="select-header orderby">
@@ -349,6 +354,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <div style="display: none" class="overview-area pt-135">
                 <div class="container">
@@ -433,7 +439,7 @@
                                         <div class="product-img">
                                             <a th:href="${'/product/'+product.getId()}">
 <!--                                                <img src="http://preview.freethemescloud.com/oswan/assets/img/product/product-1.jpg" alt="car">-->
-                                                <img th:src="${product.getThumbnail()}" alt="Car image">
+                                                <img th:src="${product.getThumbnail()}" alt="Car image" style="height: 630px">
                                             </a>
                                             <div class="product-item-dec">
                                                 <ul>

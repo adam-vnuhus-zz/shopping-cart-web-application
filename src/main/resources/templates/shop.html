@@ -27,7 +27,8 @@
     <body>
         <div class="wrapper">
             <!-- header start -->
-            <header>
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -236,6 +237,8 @@
                     </div>
                 </div>
             </header>
+            <!---->
+
             <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
@@ -402,7 +405,9 @@
                                             <div class="product-wrapper mb-35">
                                                 <div class="product-img">
                                                     <a th:href="${'/product/'+product.getId()}">
-                                                        <img th:src="${product.getThumbnail()}" alt="This is a car">
+                                                        <img th:src="${product.getThumbnail()}"
+                                                             style="height:272px"
+                                                             alt="This is a car">
                                                     </a>
                                                     <div class="product-item-dec">
                                                         <ul>
@@ -467,11 +472,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product-width col-md-6 col-xl-4 col-lg-6">
+                                        <div style="display: none" class="product-width col-md-6 col-xl-4 col-lg-6">
                                             <div class="product-wrapper mb-35">
                                                 <div class="product-img">
                                                     <a th:href="${'/product/'+product.getId()}">
-                                                        <img th:src="${product.getThumbnail()}" alt="This is a car">
+                                                        <img th:src="${product.getThumbnail()}"
+
+                                                             alt="This is a car">
                                                     </a>
                                                     <div class="product-item-dec">
                                                         <ul>

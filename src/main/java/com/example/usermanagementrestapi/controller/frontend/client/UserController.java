@@ -1,7 +1,6 @@
 package com.example.usermanagementrestapi.controller.frontend.client;
 
 import com.example.usermanagementrestapi.entity.User;
-import com.example.usermanagementrestapi.model.request.view_model.ProductViewModel;
 import com.example.usermanagementrestapi.model.request.view_model.UserViewModel;
 import com.example.usermanagementrestapi.security.CustomUserDetails;
 import com.example.usermanagementrestapi.security.JwtUserDetailsService;
@@ -35,7 +34,7 @@ public class UserController extends BaseController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/detail")
-    public String getUserDetail(@Valid @ModelAttribute("productname") ProductViewModel productName,
+    public String getUserDetail(@Valid @ModelAttribute("username") UserViewModel userName,
                                 Model model,
                                 HttpServletResponse response,
                                 HttpServletRequest request,

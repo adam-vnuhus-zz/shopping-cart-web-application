@@ -25,7 +25,9 @@
     </head>
     <body>
         <div class="wrapper">
-            <header>
+            <!---->
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -234,7 +236,7 @@
                     </div>
                 </div>
             </header>
-            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(/img/banner/banner-4.jpg)">
+            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
                         <h2>Lịch sử đơn hàng</h2>
@@ -267,7 +269,7 @@
                             <th scope="row" th:text="${iter.index + 1}">1</th>
                             <td>
                                 <a>
-                                    <img style="width: auto; max-height: 250px;" th:src="${orderItem.getThumbnail()}">
+                                    <img style="width: 375px; max-height: 250px;" th:src="${orderItem.getThumbnail()}">
                                 </a>
                             </td>
                             <td th:text="${orderItem.getName()}">Otto</td>

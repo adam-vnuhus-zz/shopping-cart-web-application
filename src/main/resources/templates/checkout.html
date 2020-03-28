@@ -25,7 +25,9 @@
     </head>
     <body>
         <div class="wrapper">
-            <header>
+            <!---->
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -234,7 +236,7 @@
                     </div>
                 </div>
             </header>
-            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(/img/banner/banner-4.jpg)">
+            <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
                         <h2>checkout page</h2>
@@ -495,7 +497,7 @@
                             </form>
                         </div>	
                         <div class="col-lg-6 col-md-12 col-12">
-                            <div class="your-order">
+                            <div style="display: none" class="your-order">
                                 <h3 style="display: none">Your order</h3>
                                 <div style="display: none" class="your-order-table table-responsive">
                                     <table>
@@ -536,7 +538,7 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                <div class="payment-method mt-40">
+                                <div style="display: none" class="payment-method mt-40">
                                     <div class="payment-accordion">
                                         <div style="display: none" class="panel-group" id="faq">
                                             <div class="panel panel-default">

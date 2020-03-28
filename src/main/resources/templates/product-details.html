@@ -26,7 +26,10 @@
     </head>
     <body>
         <div class="wrapper">
-            <header>
+
+            <!--header-->
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -258,7 +261,9 @@
                                         <div class="tab-pane active" id="pro-details1">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a th:href="${productDetailViewModel.getProductViewModel().getThumbnail()}">
-                                                    <img th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}" th:attr="data-zoom-image=${productDetailViewModel.getProductViewModel().getThumbnail()}" alt="abc">
+                                                    <img th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}"
+                                                         th:attr="data-zoom-image=${productDetailViewModel.getProductViewModel().getThumbnail()}"
+                                                         alt="abc" style="height: 450px">
                                                 </a>
                                             </div>
                                         </div>

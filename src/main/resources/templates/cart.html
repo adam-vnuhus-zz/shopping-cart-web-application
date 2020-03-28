@@ -25,7 +25,10 @@
     </head>
     <body>
         <div class="wrapper">
-            <header>
+
+            <!---->
+            <div th:replace="~{/fragment/header :: header}"></div>
+            <header style="display: none">
                 <div class="header-area transparent-bar ptb-55">
                     <div class="container">
                         <div class="row">
@@ -234,6 +237,7 @@
                     </div>
                 </div>
             </header>
+
             <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
@@ -255,12 +259,12 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product-name">Ảnh</th>
-                                            <th class="product-price">Tên sản phẩm</th>
-                                            <th class="product-name">Giá</th>
-                                            <th class="product-price">Số lượng</th>
-                                            <th class="product-quantity">Tổng giá</th>
-                                            <th class="product-subtotal">Xoá</th>
+                                            <th class="product-name">Image</th>
+                                            <th class="product-price">Name</th>
+                                            <th class="product-name">Price</th>
+                                            <th class="product-price">Amount</th>
+                                            <th class="product-quantity">Total</th>
+                                            <th class="product-subtotal">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -347,7 +351,7 @@
                             <div class="cart-shiping-update">
                                 <div class="cart-shipping">
                                     <a class="btn-style cr-btn" th:href="@{'/frontend/client'}">
-                                        <span>Tiếp tục mua </span>
+                                        <span>Shopping continue </span>
                                     </a>
                                 </div>
                                 <div class="update-checkout-cart">
@@ -378,11 +382,11 @@
                                 <h3>cart total</h3>
                                 <ul>
                                     <li>
-                                        Tổng
+                                        Total
                                         <span  th:text="${'$' + shoppingCartViewModel.getTotalPrice()}">$909.00</span>
                                     </li>
                                     <li>
-                                        Tổng số sản phẩm
+                                        Items total
                                         <span th:text="${shoppingCartViewModel.getProductAmount()}">$918.00</span>
                                     </li>
                                     <li style="display: none">

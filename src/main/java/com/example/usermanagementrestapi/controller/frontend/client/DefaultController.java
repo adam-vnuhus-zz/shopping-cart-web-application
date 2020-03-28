@@ -20,7 +20,7 @@ public class DefaultController {
 
     @GetMapping("/register")
     public String register(){
-        return "login-register";
+        return "register";
 
     }
 

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header class="header-main_area"  th:fragment="header" >
+    <div class="header-area transparent-bar ptb-55">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-4">
+                    <div class="logo-small-device">
+                        <a th:href="@{/frontend/client}"><img alt="" src="/img/logo/logo.png"></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-8">
+                    <div class="header-contact-menu-wrapper pl-45">
+                        <div class="header-contact">
+                            <p>WANT TO TALK WITH US  +01254 265 987</p>
+                        </div>
+                        <div class="menu-wrapper text-center">
+                            <button class="menu-toggle">
+                                <img class="s-open" alt="" src="/img/icon-img/menu.png">
+                                <img class="s-close" alt="" src="/img/icon-img/menu-close.png">
+                            </button>
+                            <div class="main-menu">
+                                <nav>
+                                    <ul>
+                                        <li><a th:href="@{/frontend/client}">home</a></li>
+                                        <li style="display: none" class="active"><a href="about-us.html">about us </a></li>
+                                        <li><a th:href="@{/products/list}">shop</a>
+                                            <ul style="display: none">
+                                                <li><a th:href="@{/products/list}">shop</a></li>
+                                                <li style="display: none"><a href="product-details.html">product details</a></li>
+
+                                                <li style="display: none"><a href="wishlist.html">wishlist</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li><a th:href="@{/cart/add}">cart</a></li>
+                                        <li><a th:href="@{/order/checkout}">checkout</a></li>
+                                        <li style="display: none"><a th:href="@{/order/history}">order history</a></li>
+                                        <li style="display: none">
+                                            <a href="#">pages</a>
+                                            <ul>
+                                                <li><a href="about-us.html">about us</a></li>
+                                                <li><a href="cart.html">cart page</a></li>
+                                                <li><a href="checkout.html">checkout</a></li>
+                                                <li><a href="wishlist.html">wishlist</a></li>
+                                                <li><a href="login-register.html">login</a></li>
+                                                <li><a href="contact.html">contact</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a sec:authorize="isAuthenticated()" style="text-transform: lowercase">
+                                                [[${#httpServletRequest.remoteUser}]]
+                                            </a>
+                                            <ul sec:authorize="hasRole('ADMIN')" class="ht-dropdown ht-my_account">
+                                                <li><a th:href="@{/admin/home}">Trang quản trị</a></li>
+                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                            </ul>
+                                            <ul sec:authorize="hasRole('USER')" class="ht-dropdown ht-my_account">
+                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                <li><a th:href="@{'/order/history'}">Order History</a></li>
+                                                <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a sec:authorize="isAnonymous()">Login</a>
+                                            <ul class="ht-dropdown ht-my_account">
+                                                <li><a th:href="@{/register}">Register</a></li>
+                                                <li class="active"><a th:href="@{/login}">Login</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: none" class="header-cart cart-small-device">
+                        <button class="icon-cart">
+                            <i class="ti-shopping-cart"></i>
+                            <span class="count-style">02</span>
+                            <span class="count-price-add">$295.95</span>
+                        </button>
+                        <div class="shopping-cart-content">
+                            <ul>
+                                <li class="single-shopping-cart">
+                                    <div class="shopping-cart-img">
+                                        <a href="#"><img alt="" src="/img/cart/cart-1.jpg"></a>
+                                    </div>
+                                    <div class="shopping-cart-title">
+                                        <h3><a href="#">Gloriori GSX 250 R </a></h3>
+                                        <span>Price: $275</span>
+                                        <span>Qty: 01</span>
+                                    </div>
+                                    <div class="shopping-cart-delete">
+                                        <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                                    </div>
+                                </li>
+                                <li class="single-shopping-cart">
+                                    <div class="shopping-cart-img">
+                                        <a href="#"><img alt="" src="/img/cart/cart-2.jpg"></a>
+                                    </div>
+                                    <div class="shopping-cart-title">
+                                        <h3><a href="#">Demonissi Gori</a></h3>
+                                        <span>Price: $275</span>
+                                        <span class="qty">Qty: 01</span>
+                                    </div>
+                                    <div class="shopping-cart-delete">
+                                        <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                                    </div>
+                                </li>
+                                <li class="single-shopping-cart">
+                                    <div class="shopping-cart-img">
+                                        <a href="#"><img alt="" src="/img/cart/cart-3.jpg"></a>
+                                    </div>
+                                    <div class="shopping-cart-title">
+                                        <h3><a href="#">Demonissi Gori</a></h3>
+                                        <span>Price: $275</span>
+                                        <span class="qty">Qty: 01</span>
+                                    </div>
+                                    <div class="shopping-cart-delete">
+                                        <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="shopping-cart-total">
+                                <h4>total: <span>$550.00</span></h4>
+                            </div>
+                            <div class="shopping-cart-btn">
+                                <a class="btn-style cr-btn" href="#">checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-menu-area col-12">
+                    <div class="mobile-menu">
+                        <nav id="mobile-menu-active">
+                            <ul class="menu-overflow">
+                                <li><a th:href="@{/frontend/client}">HOME</a></li>
+                                <li style="display: none">
+                                    <a href="#">pages</a>
+                                    <ul>
+                                        <li><a href="about-us.html">about us</a></li>
+                                        <li><a href="cart.html">cart page</a></li>
+                                        <li><a href="checkout.html">checkout</a></li>
+                                        <li><a href="wishlist.html">wishlist</a></li>
+                                        <li><a href="contact.html">contact</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a th:href="@{/products/list}">shop</a>
+                                    <ul style="display: none">
+                                        <li><a th:href="@{/products/list}">shop</a></li>
+                                        <li style="display: none"><a th:href="@{/cart/add}">product details</a></li>
+
+                                        <li style="display: none"><a href="wishlist.html">wishlist</a></li>
+
+                                    </ul>
+                                </li>
+                                <li><a th:href="@{/cart/add}">cart</a></li>
+                                <li><a th:href="@{/order/checkout}">checkout</a></li>
+                                <li><a sec:authorize="isAnonymous()">Đăng nhập</a>
+                                    <ul class="ht-dropdown ht-my_account">
+                                        <li><a href="/register">Đăng ký</a></li>
+                                        <li class="active"><a th:href="@{/login}">Đăng nhập</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a sec:authorize="isAuthenticated()" style="text-transform: lowercase">
+                                        [[${#httpServletRequest.remoteUser}]]
+                                        <i class="fa fa-chevron-down"></i></a>
+                                    <div sec:authorize="hasRole('ADMIN')">
+                                        <ul class="ht-dropdown ht-my_account">
+                                            <li><a th:href="@{/admin/home}">Trang quản trị</a></li>
+                                            <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                            <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                    <div sec:authorize="hasRole('USER')">
+                                        <ul class="ht-dropdown ht-my_account">
+                                            <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                            <li><a th:href="@{'/order/history'}">Lịch sử đơn hàng</a></li>
+                                            <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: none" class="header-cart-wrapper">
+            <div class="header-cart">
+                <button class="icon-cart">
+                    <i class="ti-shopping-cart"></i>
+                    <span class="count-style">02</span>
+                    <span class="count-price-add">$295.95</span>
+                </button>
+                <div class="shopping-cart-content">
+                    <ul>
+                        <li class="single-shopping-cart">
+                            <div class="shopping-cart-img">
+                                <a href="#"><img alt="" src="/img/cart/cart-1.jpg"></a>
+                            </div>
+                            <div class="shopping-cart-title">
+                                <h3><a href="#">Gloriori GSX 250 R </a></h3>
+                                <span>Price: $275</span>
+                                <span>Qty: 01</span>
+                            </div>
+                            <div class="shopping-cart-delete">
+                                <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                            </div>
+                        </li>
+                        <li class="single-shopping-cart">
+                            <div class="shopping-cart-img">
+                                <a href="#"><img alt="" src="/img/cart/cart-2.jpg"></a>
+                            </div>
+                            <div class="shopping-cart-title">
+                                <h3><a href="#">Demonissi Gori</a></h3>
+                                <span>Price: $275</span>
+                                <span class="qty">Qty: 01</span>
+                            </div>
+                            <div class="shopping-cart-delete">
+                                <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                            </div>
+                        </li>
+                        <li class="single-shopping-cart">
+                            <div class="shopping-cart-img">
+                                <a href="#"><img alt="" src="/img/cart/cart-3.jpg"></a>
+                            </div>
+                            <div class="shopping-cart-title">
+                                <h3><a href="#">Demonissi Gori</a></h3>
+                                <span>Price: $275</span>
+                                <span class="qty">Qty: 01</span>
+                            </div>
+                            <div class="shopping-cart-delete">
+                                <a href="#"><i class="icofont icofont-ui-delete"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="shopping-cart-total">
+                        <h4>total: <span>$550.00</span></h4>
+                    </div>
+                    <div class="shopping-cart-btn">
+                        <a class="btn-style cr-btn" href="#">checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>
