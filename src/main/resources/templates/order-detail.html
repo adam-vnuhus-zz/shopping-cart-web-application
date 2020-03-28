@@ -239,29 +239,29 @@
             <div class="breadcrumb-area pt-255 pb-170" style="background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)">
                 <div class="container-fluid">
                     <div class="breadcrumb-content text-center">
-                        <h2>Lịch sử đơn hàng</h2>
+                        <h2>Order History</h2>
                         <ul style="display: none">
                             <li>
                                 <a href="#">home</a>
                             </li>
-                            <li>checkout page</li>
+                            <li>order history</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- order detail start -->
             <div class="checkout-area pt-130 pb-100">
-                <h3 style="margin-top: 30px">Tổng số sản phẩm: <span th:text="${orderDetailViewModel.getTotalProduct()}"></span></h3>
+                <h3 style="margin-top: 30px">Total items: <span th:text="${orderDetailViewModel.getTotalProduct()}"></span></h3>
                 <div class="container table-responsive">
 
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Ảnh</th>
-                            <th scope="col">Tên mặt hàng</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Giá</th>
+                            <th scope="col">Index</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Item name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -290,7 +290,7 @@
                         </tbody>
                         <!--<tfoot>-->
                         <tr>
-                            <th colspan="4">Tổng giá trị đơn hàng</th>
+                            <th colspan="4">Total</th>
                             <th colspan="6" th:text="${'$' + orderDetailViewModel.getTotalPrice()}"></th>
                         </tr>
                         <!--</tfoot>-->
@@ -653,7 +653,9 @@
                     </div>
                 </div>
             </div>
-            <footer>
+
+            <footer class="footer" th:replace="/fragment/footer :: footer"></footer>
+            <footer style="display: none">
                 <div class="footer-top pt-210 pb-98 theme-bg">
                     <div class="container">
                        <div class="row">

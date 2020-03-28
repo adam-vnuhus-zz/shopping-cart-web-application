@@ -289,7 +289,10 @@
                         <div class="container">
                             <div class="slider-content slider-animated-1">
                                 <div class="slider-img text-center">
-                                    <img class="animated" src="/img/slider/bike-1.png" alt="slider images">
+                                    <img style="width: 1193px; height: 600px;"
+                                            class="animated"
+                                         src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/e-class/saloon-w213/explore/specification-teaser/_jcr_content/par/imagenumbercombinati/media/videoimageslide/image.MQ6.8.2x.20190618080426.jpeg"
+                                         alt="slider images">
                                 </div>
                                 <div class="slider-text-img">
                                     <h6 class="animated">BOOK YOUR CAR INSTANTLY AND ENJOY DISCOUNT</h6>
@@ -303,7 +306,10 @@
                         <div class="container">
                             <div class="slider-content slider-animated-1">
                                 <div class="slider-img text-center">
-                                    <img class="animated" src="http://preview.freethemescloud.com/oswan/assets/img/slider/bike-2.png" alt="slider images">
+                                    <img style="width: 1193px; height: 600px;"
+                                            class="animated"
+                                         src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/glc/suv-x253/design/lines-comparison/_jcr_content/comparisonslider/par/comparisonslide_46377923/exteriorImage.MQ6.12.2x.20190620091651.jpeg"
+                                         alt="Car">
                                 </div>
                                 <div class="slider-text-img">
                                     <h6 class="animated">BOOK YOUR CAR INSTANTLY AND ENJOY DISCOUNT</h6>
@@ -317,7 +323,9 @@
                         <div class="container">
                             <div class="slider-content slider-animated-1">
                                 <div class="slider-img text-center">
-                                    <img class="animated" src="/img/slider/car-1.png" alt="slider images">
+                                    <img style="width: 1193px; height: 600px;"
+                                            class="animated"
+                                            src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/models/glc/suv-x253/design/lines-comparison/_jcr_content/comparisonslider/par/comparisonslide/exteriorImage.MQ6.12.2x.20190620091651.jpeg" alt="slider images">
                                 </div>
                                 <div class="slider-text-img">
                                     <h6 class="animated">BOOK YOUR CAR INSTANTLY AND ENJOY DISCOUNT</h6>
@@ -392,7 +400,7 @@
                             <div class="banner-wrapper mb-30">
                                 <a href="#"><img src="/img/banner/banner-1.jpg" alt="image"></a>
                                 <div class="banner-content">
-                                    <h2>BUY NEW BIKE</h2>
+                                    <h2>BUY NEW CAR</h2>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +408,7 @@
                             <div class="banner-wrapper mb-30">
                                 <a href="#"><img src="/img/banner/banner-2.jpg" alt="image"></a>
                                 <div class="banner-content">
-                                    <h2>SELL YOUR BIKE</h2>
+                                    <h2>SELL YOUR CAR</h2>
                                 </div>
                             </div>
                         </div>
@@ -418,12 +426,12 @@
             <div class="product-area pb-190">
                 <div class="container">
                     <div class="section-title text-center mb-50">
-                        <h2>CHOOSE YOUR BIKE</h2>
-                        <p><span>OSWAN</span> the most latgest bike store in the wold can serve you latest            qulity of motorcycle also you can sell here your motorcycle</p>
+                        <h2>CHOOSE YOUR CAR</h2>
+                        <p><span>OSWAN</span> the most latgest car store in the wold can serve you latest            qulity of motorcycle also you can sell here your motorcycle</p>
                     </div>
                     <div class="product-tab-list text-center mb-80 nav product-menu-mrg" role="tablist">
                         <a class="active" href="#home1" data-toggle="tab" >
-                            <h4>NEW BIKES </h4>
+                            <h4>NEW CARS </h4>
                         </a>
                         <a style="display: none" href="#home2" data-toggle="tab">
                             <h4> USED BIKES </h4>
@@ -441,7 +449,7 @@
 <!--                                                <img src="http://preview.freethemescloud.com/oswan/assets/img/product/product-1.jpg" alt="car">-->
                                                 <img th:src="${product.getThumbnail()}" alt="Car image" style="height: 630px">
                                             </a>
-                                            <div class="product-item-dec">
+                                            <div style="display: none" class="product-item-dec">
                                                 <ul>
                                                     <li>2018</li>
                                                     <li>MANUAL</li>
@@ -460,7 +468,7 @@
                                                     <i class=" ti-heart"></i>
                                                 </a>
 
-                                                <a class="action-reload" title="Quick View"
+                                                <a style="display: none" class="action-reload" title="Quick View"
                                                    data-toggle="modal" data-target="#exampleModal" href="#">
                                                     <i class=" ti-zoom-in"></i>
                                                 </a>
@@ -469,7 +477,7 @@
                                                 <div class="product-title-spreed">
                                                     <h4><a th:href="${'/product/'+product.getId()}"
                                                            th:text="${product.getName()}">Gloriori GSX 250 R</a></h4>
-                                                    <span>6600 RPM</span>
+                                                    <span style="display: none">6600 RPM</span>
                                                 </div>
                                                 <div class="product-price">
                                                     <span th:text="${'$' + product.getPrice()}">$2549</span>
@@ -477,6 +485,8 @@
                                             </div>
                                         </div>
                                     </div>
+
+
                                     <div style="display: none" class="product-wrapper">
                                         <div class="product-img">
                                             <a href="product-details.html">
@@ -1030,6 +1040,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="latest-product-area pt-205 pb-145 bg-img"
                  style="display: none;background-image: url(http://preview.freethemescloud.com/oswan/assets/img/banner/banner-4.jpg)"
             >
@@ -1438,7 +1449,9 @@
                     </div>
                 </div>
             </div>
-            <footer>
+
+            <footer class="footer" th:replace="/fragment/footer :: footer"></footer>
+            <footer style="display: none">
                 <div class="footer-top pt-210 pb-98 theme-bg">
                     <div class="container">
                        <div class="row">
@@ -1450,7 +1463,7 @@
                                         </a>
                                     </div>
                                     <div class="footer-about">
-                                        <p><span>OSWAN</span> the most latgest bike store in the wold can serve you latest ulity of motorcycle soucan sell here your motorcycle it quo </p>
+                                        <p><span>OSWAN</span> the most latgest car store in the wold can serve you latest ulity of motorcycle soucan sell here your motorcycle it quo </p>
                                         <div class="footer-support">
                                             <h5>FOR SUPPORT</h5>
                                             <span> 01245 658 698 (Toll Free)</span>

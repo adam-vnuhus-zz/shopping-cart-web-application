@@ -254,6 +254,7 @@
             <div class="product-details-area fluid-padding-3 ptb-130">
                 <div class="container-fluid">
                     <div class="row">
+
                         <div class="col-lg-6">
                             <div class="product-details-img-content">
                                 <div class="product-details-tab mr-40">
@@ -261,61 +262,62 @@
                                         <div class="tab-pane active" id="pro-details1">
                                             <div class="easyzoom easyzoom--overlay">
                                                 <a th:href="${productDetailViewModel.getProductViewModel().getThumbnail()}">
-                                                    <img th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}"
-                                                         th:attr="data-zoom-image=${productDetailViewModel.getProductViewModel().getThumbnail()}"
-                                                         alt="abc" style="height: 450px">
+                                                    <img style="height: 360px; width: 609px"
+                                                    th:src="${productDetailViewModel.getProductViewModel().getThumbnail()}"
+                                                         alt="this is a car" >
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="pro-details2">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a th:each=" productImg : ${productDetailViewModel.getProductViewModel().getImageViewModels()}" th:href="${productImg.getLink()}">
-                                                    <img th:src="${productImg.getLink()}" alt="This is a car">
+                                        <!--<div class="tab-pane" id="pro-details2">
+                                            <div class="easyzoom easyzoom&#45;&#45;overlay">
+                                                <a href="assets/img/product-details/bl2.jpg">
+                                                    <img src="assets/img/product-details/l2.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="pro-details3">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl3.jpg">
-                                                    <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/l3.jpg" alt="">
+                                            <div class="easyzoom easyzoom&#45;&#45;overlay">
+                                                <a href="assets/img/product-details/bl3.jpg">
+                                                    <img src="assets/img/product-details/l3.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="pro-details4">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl4.jpg">
-                                                    <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/l4.jpg" alt="">
+                                            <div class="easyzoom easyzoom&#45;&#45;overlay">
+                                                <a href="assets/img/product-details/bl4.jpg">
+                                                    <img src="assets/img/product-details/l4.jpg" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="pro-details5">
-                                            <div class="easyzoom easyzoom--overlay">
-                                                <a href="http://preview.freethemescloud.com/oswan/assets/img/product-details/bl3.jpg">
-                                                    <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/l3.jpg" alt="">
+                                            <div class="easyzoom easyzoom&#45;&#45;overlay">
+                                                <a href="assets/img/product-details/bl3.jpg">
+                                                    <img src="assets/img/product-details/l3.jpg" alt="">
                                                 </a>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="product-details-small nav mt-12 product-dec-slider owl-carousel">
-                                        <a class="active" th:each=" productImg : ${productDetailViewModel.getProductViewModel().getImageViewModels()}" href="#pro-details2">
-                                            <img th:src="${productImg.getLink()}" alt="This is a car">
+                                        <a class="active" href="#pro-details1" th:each=" productImg : ${productDetailViewModel.getProductViewModel().getImageViewModels()}">
+                                            <img th:src="${productImg.getLink()}" alt="this is a car">
                                         </a>
-                                        <a href="#pro-details2">
-                                            <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s2.jpg" alt="">
+                                        <!--<a href="#pro-details2">
+                                            <img src="assets/img/product-details/s2.jpg" alt="">
                                         </a>
                                         <a href="#pro-details3">
-                                            <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s3.jpg" alt="">
+                                            <img src="assets/img/product-details/s3.jpg" alt="">
                                         </a>
                                         <a href="#pro-details4">
-                                            <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s4.jpg" alt="">
+                                            <img src="assets/img/product-details/s4.jpg" alt="">
                                         </a>
                                         <a href="#pro-details5">
-                                            <img src="http://preview.freethemescloud.com/oswan/assets/img/product-details/s3.jpg" alt="">
-                                        </a>
+                                            <img src="assets/img/product-details/s3.jpg" alt="">
+                                        </a>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-6">
                             <div class="product-details-content">
                                 <h2 th:text="${productDetailViewModel.getProductViewModel().getName()}" >Klager GSX 250 R</h2>
@@ -433,7 +435,9 @@
                     </div>
                 </div>
             </div>
-            <footer>
+
+            <footer class="footer" th:replace="/fragment/footer :: footer"></footer>
+            <footer style="display: none">
                 <div class="footer-top pt-210 pb-98 theme-bg">
                     <div class="container">
                        <div class="row">
