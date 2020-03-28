@@ -41,11 +41,11 @@ public class UserController extends BaseController {
                                 final Principal principal) {
 
 
-        this.checkCookie(response,request,principal);
+        this.checkCookie(response, request, principal);
 
         UserViewModel userViewModel = new UserViewModel();
 
-        String  username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         CustomUserDetails user = (CustomUserDetails) jwtUserDetailsService.loadUserByUsername(username);
 
         userViewModel.setAddress(user.getUser().getAddress());
@@ -54,9 +54,9 @@ public class UserController extends BaseController {
         userViewModel.setName(user.getUser().getFullName());
         userViewModel.setPhoneNumber(user.getUser().getPhone());
 
-        model.addAttribute("userViewModel",userViewModel);
+        model.addAttribute("userViewModel", userViewModel);
 
-        return "client/user-detail";
+        return "user-detail";
     }
 
     @PostMapping("/update")
@@ -67,7 +67,7 @@ public class UserController extends BaseController {
             User userEntity = userService.findByUseremail(username);
 
             userEntity.setAddress(user.getAddress());
-//            userEntity.setAvatar(user.getAvatar());
+
             userEntity.setEmail(user.getEmail());
             userEntity.setFullName(user.getFullName());
             userEntity.setPhone(user.getPhone());
@@ -87,7 +87,7 @@ public class UserController extends BaseController {
 
         ChangePasswordVM changePasswordVM = new ChangePasswordVM();
         model.addAttribute("changePassword", changePasswordVM);
-        return "client/change-password";
+        return "change-password";
     }*/
 
     /*@PostMapping("change-password")

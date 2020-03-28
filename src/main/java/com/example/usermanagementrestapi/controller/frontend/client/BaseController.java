@@ -2,7 +2,6 @@ package com.example.usermanagementrestapi.controller.frontend.client;
 
 import com.example.usermanagementrestapi.entity.ShoppingCart;
 import com.example.usermanagementrestapi.service.ShoppingCartService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -20,7 +19,7 @@ public class BaseController {
                             HttpServletRequest request,
                             Principal principal) {
 
-        Cookie cookie[] = request.getCookies();
+        Cookie[] cookie = request.getCookies();
 
         if (principal != null) {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -40,4 +39,5 @@ public class BaseController {
             }
         }
     }
+
 }

@@ -20,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("select count(p.productId) from Product p")
     long getTotalProducts();
 
-    @Query(value = "Select * from Product order by create_date desc limit 6", nativeQuery = true)
+    @Query(value = "Select * from Product order by create_date desc limit 9", nativeQuery = true)
     List<Product> getListProductNew();
 
     @Query("SELECT p FROM Product p " +

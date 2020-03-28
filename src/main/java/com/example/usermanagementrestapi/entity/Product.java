@@ -30,11 +30,11 @@ public class Product implements Serializable {
     private String name;
 
     //Main image
-    
+
     private String thumbnail;
 
     @Type(type = "json")
-    @Column( columnDefinition = "json")
+    @Column(columnDefinition = "json")
     private Engine engine;
 
     private String description;

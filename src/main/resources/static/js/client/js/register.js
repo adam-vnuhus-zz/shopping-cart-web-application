@@ -15,7 +15,7 @@ $(document).ready(function() {
         if (!isPhone($('#register-phone').val().trim())) {
             swal(
                 'Error',
-                'Chưa đúng định dạng số điện thoại!',
+                'Not correct number format!',
                 'error'
             );
             return ;
@@ -24,7 +24,7 @@ $(document).ready(function() {
         if (!isEmail($('#register-email').val().trim())) {
             swal(
                 'Error',
-                'Chưa đúng định dạng mail!',
+                'Not correct mail format!',
                 'error'
             );
             return ;
@@ -33,7 +33,7 @@ $(document).ready(function() {
         if ($('#register-password').val().trim() !== $('#register-password-confirmation').val().trim()) {
             swal(
                 'Error',
-                'Password không trung nhau !',
+                'Password not same!',
                 'error'
             );
             return ;
@@ -50,7 +50,7 @@ $(document).ready(function() {
         axios.post("/api/user", data).then(function(res){
             if(res.data.success) {
                 swal(
-                    'Good job!',
+                    'Done!',
                     res.data.message,
                     'success'
                 ).then(function() {

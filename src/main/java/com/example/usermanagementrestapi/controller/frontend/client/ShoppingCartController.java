@@ -50,7 +50,7 @@ public class ShoppingCartController extends BaseController {
             if (principal != null) {
                 ShoppingCart shoppingCartEntity = shoppingCartService.findByUserName(username);
                 if (shoppingCartEntity != null) {
-//                    productAmount = shoppingCartEntity.getListCartProducts().size();
+
                     for (CartItem cartItem : shoppingCartEntity.getListCartProducts()) {
                         double temp = 0;
                         CartItemViewModel cartItemViewModel = new CartItemViewModel();
@@ -92,5 +92,6 @@ public class ShoppingCartController extends BaseController {
         }
 
         return null;
+
     }
 }

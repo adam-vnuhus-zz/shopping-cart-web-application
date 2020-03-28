@@ -28,26 +28,10 @@ public class UserApiController {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
-    @PostMapping("/user")
-    public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserReq req) {
-        BaseApiResult result = new BaseApiResult();
-        try {
-            userService.createUser(req);
-            result.setSuccess(true);
-            result.setMessage("Đăng ký thành công!");
-        } catch (Exception e) {
-            result.setSuccess(false);
-            result.setMessage(e.getMessage());
-        }
-        return ResponseEntity.ok(result);
-    }
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> login(@Valid @RequestBody User user,
@@ -71,20 +55,35 @@ public class UserApiController {
             String token = jwtTokenUtil.generateToken((UserDetails) authentication.getPrincipal());
 
             result.setSuccess(true);
-            result.setMessage("Đăng nhập thành công !");
+            result.setMessage("Login success!");
 
             Cookie jwtToken = new Cookie("jwt_token", token);
-            jwtToken.setMaxAge(60*60*24);
+            jwtToken.setMaxAge(60 * 60 * 24);
             jwtToken.setPath("/");
             response.addCookie(jwtToken);
         } catch (Exception e) {
             result.setSuccess(false);
-            result.setMessage("Email or password không chính xác!");
+            result.setMessage("Email or password not correct!");
         }
 
 
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping("/user")
+    public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserReq req) {
+
+        BaseApiResult result = new BaseApiResult();
+        try {
+            userService.createUser(req);
+            result.setSuccess(true);
+            result.setMessage("Register success!");
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
+        }
+
+        return ResponseEntity.ok(result);
+    }
 
 }

@@ -8,25 +8,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class DefaultController {
 
-    @GetMapping("/login")
-    public String login(@ModelAttribute("productname") ProductViewModel productName) {
-        return "login-register";
-    }
-
-    @GetMapping("/order")
-    public String order(  @ModelAttribute("productname") ProductViewModel productName){
-        return "checkout";
-    }
-
     @GetMapping("/register")
-    public String register(){
+    public String register() {
+
         return "register";
 
     }
 
-    @GetMapping("/user-detail")
-    public String userdetail(){
-        return "user-detail";
+    @GetMapping("/login")
+    public String login(@ModelAttribute("productname") ProductViewModel productName) {
 
+        return "login-register";
     }
+
+    @GetMapping("/order")
+    public String order(@ModelAttribute("productname") ProductViewModel productName) {
+
+        return "checkout";
+    }
+
 }

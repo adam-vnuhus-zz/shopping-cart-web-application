@@ -37,22 +37,22 @@ public class ProductController {
                           @Valid @ModelAttribute("productname") ProductViewModel productName,
                           @RequestParam(name = "categoryId", required = false) Integer categoryId,
                           @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-                          @RequestParam(name = "size", required = false, defaultValue = "4") Integer size,
+                          @RequestParam(name = "size", required = false, defaultValue = "3") Integer size,
                           @RequestParam(name = "sortByPrice", required = false) String sort
-                          ) {
+    ) {
 
         HomeViewModel homeViewModel = new HomeViewModel();
 
-        Sort sortable =Sort.by(Sort.Direction.ASC,"id");
-        if(sort != null) {
+        Sort sortable = Sort.by(Sort.Direction.ASC, "id");
+        if (sort != null) {
             if (sort.equals("ASC")) {
-                sortable =  Sort.by(Sort.Direction.ASC,"price");
-            }else {
-                sortable = Sort.by(Sort.Direction.DESC,"price");
+                sortable = Sort.by(Sort.Direction.ASC, "price");
+            } else {
+                sortable = Sort.by(Sort.Direction.DESC, "price");
             }
         }
 
-        Pageable pageable = PageRequest.of(page,size,sortable);
+        Pageable pageable = PageRequest.of(page, size, sortable);
 
         Page<Product> productPage = null;
 
@@ -63,7 +63,7 @@ public class ProductController {
             homeViewModel.setKeyWord(category.getBrand());
         } else if (productName.getName() != null && !productName.getName().isEmpty()) {
             productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, productName.getName().trim());
-            homeViewModel.setKeyWord("Kết quả tìm kiếm cho: " + productName.getName());
+            homeViewModel.setKeyWord("Result for: " + productName.getName());
         } else {
             productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, null);
         }
@@ -88,13 +88,13 @@ public class ProductController {
 
         homeViewModel.setProductViewModels(productViewModels);
         if (productViewModels.size() == 0) {
-            homeViewModel.setKeyWord("Không tìm thấy");
+            homeViewModel.setKeyWord("Not Found");
         }
 
 
         model.addAttribute("homeViewModel", homeViewModel);
         model.addAttribute("page", productPage);
-//        return "client/listProduct";
+
         return "shop";
     }
 }

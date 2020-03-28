@@ -15,5 +15,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
             "ORDER BY cp.cart_item_id DESC LIMIT 1", nativeQuery = true)
     CartItem findFirstCartItemByShoppingCartIdAndProductId(@Param("shoppingCartId") int shoppingCartId, @Param("productId") int productId);
 
-
 }

@@ -30,12 +30,12 @@ public class ProductDetailController {
     @GetMapping("/{productId}")
     public String productDetail(@PathVariable Integer productId,
                                 Model model,
-                                @Valid @ModelAttribute("productname") ProductViewModel productName){
+                                @Valid @ModelAttribute("productname") ProductViewModel productName) {
 
         ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel();
         Product product = productService.getOne(productId);
         ProductViewModel productViewModel = new ProductViewModel();
-        if(product!=null) {
+        if (product != null) {
             productViewModel.setId(product.getProductId());
             productViewModel.setName(product.getName());
             productViewModel.setThumbnail(product.getThumbnail());
@@ -46,7 +46,7 @@ public class ProductDetailController {
              * set list product image vm
              */
             List<ImageViewModel> imageViewModels = new ArrayList<>();
-            for(Images images : product.getImages()) {
+            for (Images images : product.getImages()) {
                 ImageViewModel imageViewModel = new ImageViewModel();
                 imageViewModel.setLink(images.getLink());
 
@@ -76,9 +76,9 @@ public class ProductDetailController {
 
         productDetailViewModel.setProductViewModel(productViewModel);
 
-        model.addAttribute("productDetailViewModel",productDetailViewModel);
+        model.addAttribute("productDetailViewModel", productDetailViewModel);
 
-//        return "client/single-product";
         return "product-details";
     }
+
 }

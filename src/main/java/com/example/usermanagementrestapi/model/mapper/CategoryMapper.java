@@ -20,7 +20,7 @@ public class CategoryMapper {
     }
 
     //Test api
-    public static Category toCategory(CategoryDto categoryDto){
+    public static Category toCategory(CategoryDto categoryDto) {
 
         Category tmp = new Category();
 
@@ -31,7 +31,7 @@ public class CategoryMapper {
         return tmp;
     }
 
-    public static Category toCategory(CategoryDto categoryDto,int categoryId){
+    public static Category toCategory(CategoryDto categoryDto, int categoryId) {
 
         Category tmp = new Category();
 

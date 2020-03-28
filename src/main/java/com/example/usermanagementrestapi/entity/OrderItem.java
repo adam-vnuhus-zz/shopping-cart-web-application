@@ -30,7 +30,7 @@ public class OrderItem implements Serializable {
     private double price;
 
     @CreationTimestamp
-    @Column( updatable = false)
+    @Column(updatable = false)
     private Date createdDate;
 
     @ManyToOne(optional = true, fetch = FetchType.LAZY)

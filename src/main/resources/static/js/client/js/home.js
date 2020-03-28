@@ -22,7 +22,7 @@ $(document).ready(function() {
                 });
             } else {
                 swal(
-                    'Bạn cần đăng nhập!',
+                    'You need to login!',
                     res.data.message,
                     'error'
                 ).then(function() {

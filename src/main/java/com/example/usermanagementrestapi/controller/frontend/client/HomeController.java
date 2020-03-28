@@ -23,27 +23,27 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/frontend/client")
-//public class HomeController extends BaseController {
-public class HomeController extends BaseController {
 
-    @Autowired
-    private CategoryService categoryService;
+public class HomeController extends BaseController {
 
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping("")
     public String home(Model model,
                        @ModelAttribute("productname") ProductViewModel productName,
-                       HttpServletResponse response,
                        HttpServletRequest request,
-                       final Principal principal){
+                       HttpServletResponse response,
+                       final Principal principal) {
 
-        this.checkCookie(response,request,principal);
+        this.checkCookie(response, request, principal);
 
         HomeViewModel homeViewModel = new HomeViewModel();
 
-        List<CategoryDto> categoryDtos =categoryService.getListCategory();
+        List<CategoryDto> categoryDtos = categoryService.getListCategory();
         List<CategoryViewModel> categoryViewModels = new ArrayList<>();
         for (CategoryDto categoryDto : categoryDtos) {
             CategoryViewModel categoryViewModel = new CategoryViewModel();
@@ -75,7 +75,7 @@ public class HomeController extends BaseController {
 
         model.addAttribute("homeViewModel", homeViewModel);
 
-//        return "client/index";
         return "index";
     }
+
 }

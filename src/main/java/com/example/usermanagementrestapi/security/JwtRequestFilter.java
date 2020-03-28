@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         //String token = httpServletRequest.getHeader(HEADER);
 
         // Lấy token từ cookie
-        String token =  null;
+        String token = null;
         Cookie cookie = WebUtils.getCookie(httpServletRequest, "jwt_token");
 
         token = cookie == null ? null : cookie.getValue();

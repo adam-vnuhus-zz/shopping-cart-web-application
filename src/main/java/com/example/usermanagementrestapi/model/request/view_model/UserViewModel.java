@@ -21,7 +21,6 @@ public class UserViewModel {
 
     private String address;
 
-//    private String avatar;
 
     private String password;
 }

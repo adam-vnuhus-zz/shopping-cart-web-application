@@ -24,7 +24,7 @@ public class ProductMapper {
     }
 
     //Test api
-    public static Product toProduct(ProductDto productDto){
+    public static Product toProduct(ProductDto productDto) {
 
         Product tmp = new Product();
 

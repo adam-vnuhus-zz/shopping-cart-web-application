@@ -16,7 +16,7 @@ $(document).ready(function() {
         axios.post("/api/authenticate", data).then(function(res){
             if(res.data.success) {
                 swal(
-                    'Good job!',
+                    'Done!',
                     res.data.message,
                     'success'
                 ).then(function () {

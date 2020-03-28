@@ -40,15 +40,7 @@ public class User implements Serializable {
     @Column(name = "full_name")
     private String fullName;
 
-//    @Column(name="avatar")
-//    private String avatar;
-//
-//    @Column(name="birthday")
-//    private Date birthday;
-
     @Column(name = "role", nullable = false, columnDefinition = "varchar(255) default 'USER'")
     private String role;
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Order> orders;
 }

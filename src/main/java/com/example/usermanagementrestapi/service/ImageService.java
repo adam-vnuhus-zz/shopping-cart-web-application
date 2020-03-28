@@ -14,7 +14,7 @@ public interface ImageService {
 
     ImageDto createImage(ImageDto imageDto);
 
-    ImageDto updateImage(ImageDto imageDto ,int imageId);
+    ImageDto updateImage(ImageDto imageDto, int imageId);
 
     void deleteImage(int imageId);
 }

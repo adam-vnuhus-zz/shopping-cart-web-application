@@ -23,5 +23,4 @@ public class UserDto {
 
     private String address;
 
-//    private Date birthday;
 }
