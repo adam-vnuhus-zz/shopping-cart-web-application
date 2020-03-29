@@ -8,10 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
 public interface UserService {
+
+    String getUser(HttpServletRequest request);
 
     List<UserDto> getListUser();
 

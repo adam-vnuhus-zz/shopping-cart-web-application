@@ -8,19 +8,31 @@ import java.util.Date;
 
 public class ProductMapper {
 
+    public static ProductViewModel toProductViewModel(Product product) {
+
+        ProductViewModel temp = new ProductViewModel();
+
+        temp.setId(product.getProductId());
+        temp.setName(product.getName());
+        temp.setThumbnail(product.getThumbnail());
+        temp.setDescription(product.getDescription());
+        temp.setPrice(product.getPrice());
+
+        return temp;
+    }
+
     public static ProductViewModel toProductViewModel(ProductDto productDto) {
 
-        ProductViewModel productViewModel = new ProductViewModel();
+        ProductViewModel temp = new ProductViewModel();
 
-        productViewModel.setId(productDto.getProductId());
-        productViewModel.setName(productDto.getName());
-        productViewModel.setThumbnail(productDto.getThumbnail());
-        productViewModel.setPrice(productDto.getPrice());
-        productViewModel.setDescription(productDto.getDescription());
-        productViewModel.setCreatedDate(productDto.getCreatedDate());
+        temp.setId(productDto.getProductId());
+        temp.setName(productDto.getName());
+        temp.setThumbnail(productDto.getThumbnail());
+        temp.setPrice(productDto.getPrice());
+        temp.setDescription(productDto.getDescription());
+        temp.setCreatedDate(productDto.getCreatedDate());
 
-        return productViewModel;
-
+        return temp;
     }
 
     public static ProductDto toProductDto(Product product) {
@@ -65,5 +77,4 @@ public class ProductMapper {
         tmp.setCreateDate(new Date());
         return tmp;
     }
-
 }

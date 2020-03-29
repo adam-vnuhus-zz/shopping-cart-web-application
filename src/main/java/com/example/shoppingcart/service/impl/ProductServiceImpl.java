@@ -1,11 +1,13 @@
 package com.example.shoppingcart.service.impl;
 
+import com.example.shoppingcart.entity.Images;
 import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.exception.DuplicateRecordException;
 import com.example.shoppingcart.exception.InternalServerException;
 import com.example.shoppingcart.exception.NotFoundException;
 import com.example.shoppingcart.model.dto.ProductDto;
 import com.example.shoppingcart.model.mapper.ProductMapper;
+import com.example.shoppingcart.model.request.view_model.ImageViewModel;
 import com.example.shoppingcart.model.request.view_model.ProductViewModel;
 import com.example.shoppingcart.repository.CategoryRepository;
 import com.example.shoppingcart.repository.ProductRepository;
@@ -23,10 +25,38 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
+    ProductService productService;
+    @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Override
+    public ProductViewModel getProductViewModelByProductId(int id) {
+
+        Product product = productService.getOne(id);
+
+        ProductViewModel productViewModel = new ProductViewModel();
+
+        if (product != null) {
+            productViewModel = ProductMapper.toProductViewModel(product);
+
+            /**
+             * set list product image vm
+             */
+            List<ImageViewModel> imageViewModels = new ArrayList<>();
+            for (Images images : product.getImages()) {
+                ImageViewModel imageViewModel = new ImageViewModel();
+                imageViewModel.setLink(images.getLink());
+
+                imageViewModels.add(imageViewModel);
+            }
+
+            productViewModel.setImageViewModels(imageViewModels);
+        }
+
+        return productViewModel;
+    }
 
     @Override
     public List<ProductViewModel> getListProductViewModel() {

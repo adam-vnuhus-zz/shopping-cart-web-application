@@ -16,6 +16,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,20 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return UserMapper.toUserDto(user);
+    }
+
+    @Override
+    public String getUser(HttpServletRequest request) {
+        Cookie[] cookie = request.getCookies();
+
+        if (cookie != null) {
+            for (Cookie c : cookie) {
+                if (c.getName().equals("username")) return c.getValue();
+            }
+        }
+
+        return null;
+
     }
 
     @Override

@@ -13,6 +13,8 @@ import java.util.List;
 @Service
 public interface ProductService {
 
+    ProductViewModel getProductViewModelByProductId(int id);
+
     List<ProductViewModel> getListProductViewModel();
 
     List<ProductDto> getListProduct();
