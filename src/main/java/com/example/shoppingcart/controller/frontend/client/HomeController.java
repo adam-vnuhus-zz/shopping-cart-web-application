@@ -1,0 +1,81 @@
+package com.example.shoppingcart.controller.frontend.client;
+
+
+import com.example.shoppingcart.model.dto.CategoryDto;
+import com.example.shoppingcart.model.dto.ProductDto;
+import com.example.shoppingcart.model.request.view_model.CategoryViewModel;
+import com.example.shoppingcart.model.request.view_model.HomeViewModel;
+import com.example.shoppingcart.model.request.view_model.ProductViewModel;
+import com.example.shoppingcart.service.CategoryService;
+import com.example.shoppingcart.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping("/frontend/client")
+
+public class HomeController extends BaseController {
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @GetMapping("")
+    public String home(Model model,
+                       @ModelAttribute("productname") ProductViewModel productName,
+                       HttpServletRequest request,
+                       HttpServletResponse response,
+                       final Principal principal) {
+
+        this.checkCookie(response, request, principal);
+
+        HomeViewModel homeViewModel = new HomeViewModel();
+
+        List<CategoryDto> categoryDtos = categoryService.getListCategory();
+        List<CategoryViewModel> categoryViewModels = new ArrayList<>();
+        for (CategoryDto categoryDto : categoryDtos) {
+            CategoryViewModel categoryViewModel = new CategoryViewModel();
+            categoryViewModel.setId(categoryDto.getCategoryId());
+            categoryViewModel.setBrand(categoryDto.getName());
+            categoryViewModel.setDescription(categoryDto.getDescription());
+            categoryViewModel.setCreatedDate(categoryDto.getCreatedDate());
+            categoryViewModels.add(categoryViewModel);
+        }
+        homeViewModel.setCategoryViewModels(categoryViewModels);
+
+        List<ProductDto> productDtos = productService.getListProductNew();
+        List<ProductViewModel> productViewModels = new ArrayList<>();
+
+        for (ProductDto productDto : productDtos) {
+            ProductViewModel productViewModel = new ProductViewModel();
+
+            productViewModel.setId(productDto.getProductId());
+            productViewModel.setName(productDto.getName());
+            productViewModel.setThumbnail(productDto.getThumbnail());
+            productViewModel.setPrice(productDto.getPrice());
+            productViewModel.setDescription(productDto.getDescription());
+            productViewModel.setCreatedDate(productDto.getCreatedDate());
+
+            productViewModels.add(productViewModel);
+        }
+
+        homeViewModel.setProductViewModels(productViewModels);
+
+        model.addAttribute("homeViewModel", homeViewModel);
+
+        return "index";
+    }
+
+}
