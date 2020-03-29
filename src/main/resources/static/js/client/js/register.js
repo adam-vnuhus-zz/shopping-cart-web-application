@@ -6,7 +6,7 @@ $(document).ready(function() {
             || $('#register-address').val().trim() === '' || $('#register-phone').val().trim() === '') {
             swal(
                 'Error',
-                'Bạn cần điền vào tất cả các giá trị!',
+                'You should fill all values!',
                 'error'
             );
             return ;
@@ -15,7 +15,7 @@ $(document).ready(function() {
         if (!isPhone($('#register-phone').val().trim())) {
             swal(
                 'Error',
-                'Not correct number format!',
+                'Not correct phone format!',
                 'error'
             );
             return ;

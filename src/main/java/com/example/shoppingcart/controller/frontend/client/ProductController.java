@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -67,27 +65,10 @@ public class ProductController {
         } else {
             productPage = productService.getListProductByCategoryOrProductNameContaining(pageable, null, null);
         }
-        List<ProductViewModel> productViewModels = new ArrayList<>();
 
-        for (Product product : productPage.getContent()) {
-            ProductViewModel productViewModel = new ProductViewModel();
-            if (product.getCategory() == null) {
-                productViewModel.setCategoryBrand("Unknown");
-            } else {
-                productViewModel.setCategoryBrand(product.getCategory().getBrand());
-            }
-            productViewModel.setId(product.getProductId());
-            productViewModel.setName(product.getName());
-            productViewModel.setThumbnail(product.getThumbnail());
-            productViewModel.setPrice(product.getPrice());
-            productViewModel.setDescription(product.getDescription());
-            productViewModel.setCreatedDate(product.getCreateDate());
 
-            productViewModels.add(productViewModel);
-        }
-
-        homeViewModel.setProductViewModels(productViewModels);
-        if (productViewModels.size() == 0) {
+        homeViewModel.setProductViewModels(productService.getListProductViewModel(productPage));
+        if (productService.getListProductViewModel(productPage).size() == 0) {
             homeViewModel.setKeyWord("Not Found");
         }
 

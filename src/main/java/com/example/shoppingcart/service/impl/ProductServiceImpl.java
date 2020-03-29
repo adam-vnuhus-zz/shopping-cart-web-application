@@ -32,6 +32,27 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
 
     @Override
+    public List<ProductViewModel> getListProductViewModel(Page<Product> productPage) {
+
+        List<ProductViewModel> productViewModels = new ArrayList<>();
+
+        for (Product product : productPage.getContent()) {
+            ProductViewModel productViewModel = new ProductViewModel();
+            if (product.getCategory() == null) {
+                productViewModel.setCategoryBrand("Unknown");
+            } else {
+                productViewModel.setCategoryBrand(product.getCategory().getBrand());
+            }
+            productViewModel = ProductMapper.toProductViewModel(product);
+            productViewModel.setCreatedDate(product.getCreateDate());
+
+            productViewModels.add(productViewModel);
+        }
+
+        return productViewModels;
+    }
+
+    @Override
     public ProductViewModel getProductViewModelByProductId(int id) {
 
         Product product = productService.getOne(id);

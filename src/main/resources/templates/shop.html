@@ -409,7 +409,7 @@
                                                              style="height:272px"
                                                              alt="This is a car">
                                                     </a>
-                                                    <div class="product-item-dec">
+                                                    <div style="display: none" class="product-item-dec">
                                                         <ul>
                                                             <li>2018</li>
                                                             <li>MANUAL</li>
@@ -428,7 +428,7 @@
                                                         <a style="display: none" class="action-cart-2" title="Wishlist" href="#">
                                                             <i class=" ti-heart"></i>
                                                         </a>
-                                                        <a class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <a style="display: none" class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
                                                             <i class=" ti-zoom-in"></i>
                                                         </a>
                                                     </div>
@@ -437,7 +437,7 @@
                                                             <h4><a
                                                                    th:href="${'/product/'+product.getId()}"
                                                                    th:text="${product.getName()}">Gloriori GSX 250 R</a></h4>
-                                                            <span>6600 RPM</span>
+                                                            <span style="display: none">6600 RPM</span>
                                                         </div>
                                                         <div class="product-price">
                                                             <span th:text="${'$' + product.getPrice()}">$2549</span>
@@ -480,7 +480,7 @@
                                                              style="height:272px"
                                                              alt="This is a car">
                                                     </a>
-                                                    <div class="product-item-dec">
+                                                    <div style="display: none" class="product-item-dec">
                                                         <ul>
                                                             <li>2018</li>
                                                             <li>MANUAL</li>
@@ -499,7 +499,7 @@
                                                         <a style="display: none" class="action-cart-2" title="Wishlist" href="#">
                                                             <i class=" ti-heart"></i>
                                                         </a>
-                                                        <a class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <a style="display: none" class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
                                                             <i class=" ti-zoom-in"></i>
                                                         </a>
                                                     </div>
@@ -508,7 +508,7 @@
                                                             <h4><a
                                                                     th:href="${'/product/'+product.getId()}"
                                                                     th:text="${product.getName()}">Gloriori GSX 250 R</a></h4>
-                                                            <span>6600 RPM</span>
+                                                            <span style="display: none">6600 RPM</span>
                                                         </div>
                                                         <div class="product-price">
                                                             <span th:text="${'$' + product.getPrice()}">$2549</span>
@@ -551,7 +551,7 @@
                                                              style="height:272px"
                                                              alt="This is a car">
                                                     </a>
-                                                    <div class="product-item-dec">
+                                                    <div style="display: none" class="product-item-dec">
                                                         <ul>
                                                             <li>2018</li>
                                                             <li>MANUAL</li>
@@ -570,7 +570,7 @@
                                                         <a style="display: none" class="action-cart-2" title="Wishlist" href="#">
                                                             <i class=" ti-heart"></i>
                                                         </a>
-                                                        <a class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <a style="display: none" class="action-reload" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
                                                             <i class=" ti-zoom-in"></i>
                                                         </a>
                                                     </div>
@@ -579,7 +579,7 @@
                                                             <h4><a
                                                                     th:href="${'/product/'+product.getId()}"
                                                                     th:text="${product.getName()}">Gloriori GSX 250 R</a></h4>
-                                                            <span>6600 RPM</span>
+                                                            <span style="display: none">6600 RPM</span>
                                                         </div>
                                                         <div class="product-price">
                                                             <span th:text="${'$' + product.getPrice()}">$2549</span>
@@ -614,7 +614,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style="display: none" class="product-width col-md-6 col-xl-4 col-lg-6">
+                                        <!--<div style="display: none" class="product-width col-md-6 col-xl-4 col-lg-6">
                                             <div class="product-wrapper mb-35">
                                                 <div class="product-img">
                                                     <a th:href="${'/product/'+product.getId()}">
@@ -755,7 +755,7 @@
                                             </div>
                                         </div>
 
-                                        <!--Trash-->
+                                        &lt;!&ndash;Trash&ndash;&gt;
                                         <div style="display: none" class="product-width col-md-6 col-xl-4 col-lg-6">
                                             <div class="product-wrapper mb-35">
                                                 <div class="product-img">
@@ -1187,7 +1187,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                                 <div style="display: none" id="use-product" class="product-grid product-view tab-pane">
