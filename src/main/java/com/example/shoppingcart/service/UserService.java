@@ -9,10 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public interface UserService {
+
+    void checkUser(HttpServletResponse response, HttpServletRequest request, Principal principal);
 
     String getUser(HttpServletRequest request);
 

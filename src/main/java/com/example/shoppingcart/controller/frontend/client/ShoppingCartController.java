@@ -2,6 +2,7 @@ package com.example.shoppingcart.controller.frontend.client;
 
 import com.example.shoppingcart.model.request.view_model.ShoppingCartViewModel;
 import com.example.shoppingcart.service.ShoppingCartService;
+import com.example.shoppingcart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,13 @@ import java.text.DecimalFormat;
 
 @Controller
 @RequestMapping("/cart")
-public class ShoppingCartController extends BaseController {
+public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    UserService userService;
 
     @GetMapping("/add")
     public String cart(Model model,
@@ -26,7 +30,8 @@ public class ShoppingCartController extends BaseController {
                        HttpServletRequest request,
                        Principal principal) {
 
-        this.checkCookie(response, request, principal);
+//        this.checkCookie(response, request, principal);
+        userService.checkUser(response, request, principal);
 
         ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel();
 

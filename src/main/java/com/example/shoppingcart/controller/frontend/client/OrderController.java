@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/order")
-public class OrderController extends BaseController {
+public class OrderController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;

@@ -1,5 +1,6 @@
 package com.example.shoppingcart.service.impl;
 
+import com.example.shoppingcart.entity.ShoppingCart;
 import com.example.shoppingcart.entity.User;
 import com.example.shoppingcart.exception.DuplicateRecordException;
 import com.example.shoppingcart.exception.InternalServerException;
@@ -9,15 +10,19 @@ import com.example.shoppingcart.model.mapper.UserMapper;
 import com.example.shoppingcart.model.request.CreateUserReq;
 import com.example.shoppingcart.model.request.UpdateUserReq;
 import com.example.shoppingcart.repository.UserRepository;
+import com.example.shoppingcart.service.ShoppingCartService;
 import com.example.shoppingcart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    ShoppingCartService shoppingCartService;
 
     @Override
     public UserDto createUser(CreateUserReq req) {
@@ -41,6 +49,30 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return UserMapper.toUserDto(user);
+    }
+
+    @Override
+    public void checkUser(HttpServletResponse response, HttpServletRequest request, Principal principal) {
+
+        Cookie[] cookie = request.getCookies();
+
+        if (principal != null) {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            ShoppingCart cartEntity = shoppingCartService.findByUserName(username);
+            if (cartEntity != null) {
+                Cookie cookie1 = new Cookie("user", cartEntity.getUsername());
+                cookie1.setPath("/");
+                response.addCookie(cookie1);
+            } else {
+                ShoppingCart cart = new ShoppingCart();
+                cart.setUsername(username);
+                shoppingCartService.createShoppingCart(cart);
+
+                Cookie cookie2 = new Cookie("user", username);
+                cookie2.setPath("/");
+                response.addCookie(cookie2);
+            }
+        }
     }
 
     @Override
