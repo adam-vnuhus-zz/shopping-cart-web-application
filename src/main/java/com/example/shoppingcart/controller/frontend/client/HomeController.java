@@ -34,8 +34,6 @@ public class HomeController {
                        HttpServletResponse response,
                        final Principal principal) {
 
-//        this.checkCookie(response, request, principal);
-
         userService.checkUser(response, request, principal);
 
         HomeViewModel homeViewModel = new HomeViewModel();

@@ -18,7 +18,6 @@ import java.util.Date;
 //OrderProduct
 public class OrderItem implements Serializable {
 
-    //orderProductId
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderItemId;

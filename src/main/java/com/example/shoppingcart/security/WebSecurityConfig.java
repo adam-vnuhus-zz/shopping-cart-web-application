@@ -55,9 +55,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/frontend/client", "/api/users").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/carts").hasAnyRole("USER")
-//                .antMatchers("/admin/**").authenticated()
-//                .antMatchers("/api/**").permitAll()
-//                .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/")
@@ -67,17 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/frontend/client")
                 .deleteCookies("jwt_token")
                 .deleteCookies("user")
-//                .exceptionHandling()
-//                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Không sử dụng session lưu lại trạng thái của principal
                 .and()
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // Lớp lọc jwt token sẽ được thực thi trước các lớp lọc mặc định
     }
-
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/client/**","/css/**", "/js/**","/images/**","/vendors/**","/webjars/**");
-//    }
 }

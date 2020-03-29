@@ -30,7 +30,6 @@ public class ShoppingCartController {
                        HttpServletRequest request,
                        Principal principal) {
 
-//        this.checkCookie(response, request, principal);
         userService.checkUser(response, request, principal);
 
         ShoppingCartViewModel shoppingCartViewModel = new ShoppingCartViewModel();
