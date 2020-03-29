@@ -6,6 +6,7 @@ import com.example.shoppingcart.exception.InternalServerException;
 import com.example.shoppingcart.exception.NotFoundException;
 import com.example.shoppingcart.model.dto.ProductDto;
 import com.example.shoppingcart.model.mapper.ProductMapper;
+import com.example.shoppingcart.model.request.view_model.ProductViewModel;
 import com.example.shoppingcart.repository.CategoryRepository;
 import com.example.shoppingcart.repository.ProductRepository;
 import com.example.shoppingcart.service.ProductService;
@@ -26,6 +27,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Override
+    public List<ProductViewModel> getListProductViewModel() {
+        List<ProductDto> productDtos = getListProductNew();
+        List<ProductViewModel> productViewModels = new ArrayList<>();
+
+        for (ProductDto productDto : productDtos) {
+
+            productViewModels.add(ProductMapper.toProductViewModel(productDto));
+        }
+
+        return productViewModels;
+    }
 
     @Override
     public List<ProductDto> getListProduct() {

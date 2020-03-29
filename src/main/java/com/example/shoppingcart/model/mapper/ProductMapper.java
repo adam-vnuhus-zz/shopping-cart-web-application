@@ -2,10 +2,26 @@ package com.example.shoppingcart.model.mapper;
 
 import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.model.dto.ProductDto;
+import com.example.shoppingcart.model.request.view_model.ProductViewModel;
 
 import java.util.Date;
 
 public class ProductMapper {
+
+    public static ProductViewModel toProductViewModel(ProductDto productDto) {
+
+        ProductViewModel productViewModel = new ProductViewModel();
+
+        productViewModel.setId(productDto.getProductId());
+        productViewModel.setName(productDto.getName());
+        productViewModel.setThumbnail(productDto.getThumbnail());
+        productViewModel.setPrice(productDto.getPrice());
+        productViewModel.setDescription(productDto.getDescription());
+        productViewModel.setCreatedDate(productDto.getCreatedDate());
+
+        return productViewModel;
+
+    }
 
     public static ProductDto toProductDto(Product product) {
 

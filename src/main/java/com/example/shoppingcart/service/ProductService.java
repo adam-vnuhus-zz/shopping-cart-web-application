@@ -2,6 +2,7 @@ package com.example.shoppingcart.service;
 
 import com.example.shoppingcart.entity.Product;
 import com.example.shoppingcart.model.dto.ProductDto;
+import com.example.shoppingcart.model.request.view_model.ProductViewModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Service
 public interface ProductService {
+
+    List<ProductViewModel> getListProductViewModel();
 
     List<ProductDto> getListProduct();
 

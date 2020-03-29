@@ -2,10 +2,23 @@ package com.example.shoppingcart.model.mapper;
 
 import com.example.shoppingcart.entity.Category;
 import com.example.shoppingcart.model.dto.CategoryDto;
+import com.example.shoppingcart.model.request.view_model.CategoryViewModel;
 
 import java.util.Date;
 
 public class CategoryMapper {
+
+    public static CategoryViewModel toCategoryViewModel(CategoryDto categoryDto) {
+
+        CategoryViewModel categoryViewModel = new CategoryViewModel();
+        categoryViewModel.setId(categoryDto.getCategoryId());
+        categoryViewModel.setBrand(categoryDto.getName());
+        categoryViewModel.setDescription(categoryDto.getDescription());
+        categoryViewModel.setCreatedDate(categoryDto.getCreatedDate());
+
+        return categoryViewModel;
+
+    }
 
     public static CategoryDto toCategoryDto(Category category) {
 

@@ -58,11 +58,11 @@
                                             </a>
                                             <ul sec:authorize="hasRole('ADMIN')" class="ht-dropdown ht-my_account">
                                                 <li><a th:href="@{/admin/home}">Trang quản trị</a></li>
-                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
-                                                <li class="active"><a th:href="@{/logout}">Đăng xuất</a></li>
+                                                <li><a th:href="@{/user/detail}">My account</a></li>
+                                                <li class="active"><a th:href="@{/logout}">Logout</a></li>
                                             </ul>
                                             <ul sec:authorize="hasRole('USER')" class="ht-dropdown ht-my_account">
-                                                <li><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
+                                                <li style="display: none"><a th:href="@{/user/detail}">Tài khoản của tôi</a></li>
                                                 <li><a th:href="@{'/order/history'}">Order History</a></li>
                                                 <li class="active"><a th:href="@{/logout}">Logout</a></li>
                                             </ul>

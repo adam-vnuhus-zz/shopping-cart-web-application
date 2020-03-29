@@ -6,6 +6,7 @@ import com.example.shoppingcart.exception.InternalServerException;
 import com.example.shoppingcart.exception.NotFoundException;
 import com.example.shoppingcart.model.dto.CategoryDto;
 import com.example.shoppingcart.model.mapper.CategoryMapper;
+import com.example.shoppingcart.model.request.view_model.CategoryViewModel;
 import com.example.shoppingcart.repository.CategoryRepository;
 import com.example.shoppingcart.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,19 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Override
+    public List<CategoryViewModel> getListCategoryViewModel() {
+        List<CategoryDto> categoryDtos = getListCategory();
+        List<CategoryViewModel> categoryViewModels = new ArrayList<>();
+
+        for (CategoryDto categoryDto : categoryDtos) {
+
+            categoryViewModels.add(CategoryMapper.toCategoryViewModel(categoryDto));
+        }
+
+        return categoryViewModels;
+    }
 
     @Override
     public List<CategoryDto> getListCategory() {
